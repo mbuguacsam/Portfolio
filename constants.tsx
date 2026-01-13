@@ -140,6 +140,17 @@ export const CERTIFICATIONS: Certification[] = [
 
 export const INITIAL_BLOG_POSTS: BlogPost[] = [
   {
+    id: 'zero-trust-landscape',
+    title: 'The Evolving Landscape of Zero-Trust Security',
+    author: 'Samson Mbugua',
+    date: 'May 24, 2024',
+    category: 'Cybersecurity',
+    excerpt: 'Exploring the advancements and challenges in Zero-Trust Architecture implementation for modern enterprises.',
+    content: 'Zero-trust security is no longer a buzzword but a fundamental shift in security strategy. In an era where the traditional network perimeter has dissolved due to remote work, cloud migration, and sophisticated cyber threats, the "never trust, always verify" principle has become critical.\n\nAdvancements in Zero-Trust Architecture (ZTA) now leverage AI-driven identity verification and micro-segmentation to isolate workloads and prevent lateral movement of attackers. However, the challenges remain significant: legacy system compatibility, user experience friction, and the complexity of managing granular access policies across a distributed ecosystem. Implementing zero-trust requires a cultural shift as much as a technical one, focusing on least-privileged access and continuous monitoring of every request, regardless of its origin.',
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800',
+    tags: ['Zero-Trust', 'Cybersecurity', 'Enterprise Security']
+  },
+  {
     id: '1',
     title: 'The Future of Post-Quantum Cryptography in Fintech',
     author: 'Samson Mbugua',

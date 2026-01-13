@@ -39,7 +39,10 @@ import {
   Share2,
   Layers,
   Fingerprint,
-  Globe
+  Globe,
+  Database,
+  Lock,
+  Box
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
 import { SKILLS, EXPERIENCE, PROJECTS, CERTIFICATIONS, INITIAL_BLOG_POSTS } from './constants';
@@ -102,7 +105,6 @@ const SkillsRadar = () => {
       <div className="absolute inset-0 bg-blue-600/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
       
       <svg width={size} height={size} className="relative z-10">
-        {/* Background Circles */}
         {[0.2, 0.4, 0.6, 0.8, 1].map((r, i) => (
           <circle
             key={i}
@@ -115,7 +117,6 @@ const SkillsRadar = () => {
           />
         ))}
 
-        {/* Axis Lines */}
         {data.map((_, i) => {
           const angle = (Math.PI * 2 * i) / data.length - Math.PI / 2;
           const x = center + radius * Math.cos(angle);
@@ -133,7 +134,6 @@ const SkillsRadar = () => {
           );
         })}
 
-        {/* Data Polygon */}
         <motion.polygon
           initial={{ opacity: 0, scale: 0.5 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -145,7 +145,6 @@ const SkillsRadar = () => {
           strokeLinejoin="round"
         />
 
-        {/* Data Points */}
         {data.map((d, i) => {
           const angle = (Math.PI * 2 * i) / data.length - Math.PI / 2;
           const x = center + radius * (d.value / 100) * Math.cos(angle);
@@ -166,7 +165,6 @@ const SkillsRadar = () => {
         })}
       </svg>
 
-      {/* Dynamic Labels */}
       <div className="absolute inset-0 pointer-events-none">
         {labels.map((l, i) => {
           const Icon = iconMap[l.name] || Activity;
@@ -271,43 +269,31 @@ const getDynamicSuggestions = async (base64Image: string, mimeType: string) => {
 
 /**
  * Robust SEO & Open Graph Metadata management.
- * Dynamically updates the document head based on current context.
  */
-const updateMetaTags = (post?: BlogPost) => {
+const updateMetaTags = (titleSuffix?: string, description?: string, image?: string) => {
   if (typeof document === 'undefined') return;
 
   const defaultTitle = "Samson Mbugua | Strategic Systems Advisor & Cyber Defense";
   const defaultDesc = "High-credibility technical founder and cybersecurity specialist architecting secure, scalable digital systems.";
-  const siteUrl = window.location.origin;
+  const title = titleSuffix ? `${titleSuffix} | Samson Mbugua` : defaultTitle;
+  const desc = description || defaultDesc;
+  const img = image || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200";
 
-  const title = post ? `${post.title} | Samson Mbugua` : defaultTitle;
-  const description = post ? post.excerpt : defaultDesc;
-  const image = post ? post.image : "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200";
-  const url = window.location.href;
-
-  // Update Page Title
   document.title = title;
 
-  // Meta Tag Configurations
   const metaData = [
-    { name: "description", content: description },
+    { name: "description", content: desc },
     { property: "og:title", content: title },
-    { property: "og:description", content: description },
-    { property: "og:image", content: image },
-    { property: "og:url", content: url },
-    { property: "og:type", content: post ? "article" : "website" },
-    { property: "og:site_name", content: "Samson Mbugua Portfolio" },
-    { name: "twitter:card", content: "summary_large_image" },
+    { property: "og:description", content: desc },
+    { property: "og:image", content: img },
+    { property: "og:url", content: window.location.href },
     { name: "twitter:title", content: title },
-    { name: "twitter:description", content: description },
-    { name: "twitter:image", content: image },
+    { name: "twitter:description", content: desc },
+    { name: "twitter:image", content: img },
   ];
 
   metaData.forEach(({ name, property, content }) => {
-    let el = name 
-      ? document.querySelector(`meta[name="${name}"]`) 
-      : document.querySelector(`meta[property="${property}"]`);
-    
+    let el = name ? document.querySelector(`meta[name="${name}"]`) : document.querySelector(`meta[property="${property}"]`);
     if (!el) {
       el = document.createElement('meta');
       if (name) el.setAttribute('name', name);
@@ -316,9 +302,6 @@ const updateMetaTags = (post?: BlogPost) => {
     }
     el.setAttribute('content', content);
   });
-  
-  // Terminal Notification
-  BackendService.log(`SEO Engine Synchronized: ${post ? `Post ID [${post.id}]` : 'Default Header'} active.`, 'SYSTEM');
 };
 
 // --- System Terminal Component ---
@@ -366,7 +349,7 @@ const SystemTerminal = () => {
 };
 
 // --- Navbar Component ---
-const Navbar = ({ onNavClick }: { onNavClick: () => void }) => {
+const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -388,11 +371,7 @@ const Navbar = ({ onNavClick }: { onNavClick: () => void }) => {
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    onNavClick(); 
-    const element = document.getElementById(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    onNavAction(href);
     setIsOpen(false);
   };
 
@@ -471,7 +450,7 @@ const SectionHeading = ({ title, subtitle, action, dark = false }: { title: stri
   </motion.div>
 );
 
-const Hero = () => (
+const Hero = ({ onNavAction }: { onNavAction: (href?: string) => void }) => (
   <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
     <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
       <motion.div 
@@ -515,9 +494,9 @@ const Hero = () => (
           variants={fadeInUp}
           className="flex flex-wrap gap-5"
         >
-          <a href="#projects" className="px-10 py-5 bg-white text-black font-black rounded-xl hover:bg-gray-200 hover:-translate-y-1 transition-all flex items-center group shadow-xl uppercase tracking-widest text-sm">
+          <button onClick={() => onNavAction('projects')} className="px-10 py-5 bg-white text-black font-black rounded-xl hover:bg-gray-200 hover:-translate-y-1 transition-all flex items-center group shadow-xl uppercase tracking-widest text-sm">
             View Projects <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </a>
+          </button>
           <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-transparent border border-white/20 text-white font-black rounded-xl hover:bg-white/5 hover:-translate-y-1 transition-all uppercase tracking-widest text-sm">
             Book a Strategy Session
           </a>
@@ -631,7 +610,95 @@ const AdvisoryHighlight = () => (
   </section>
 );
 
-const Projects = () => (
+const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => void }) => {
+  useEffect(() => {
+    updateMetaTags(project.title, project.tagline, project.image);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [project]);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, x: 20 }} 
+      animate={{ opacity: 1, x: 0 }} 
+      exit={{ opacity: 0, x: -20 }} 
+      className="max-w-6xl mx-auto px-6 py-20"
+    >
+      <button onClick={onBack} className="flex items-center gap-4 text-blue-500 font-black uppercase tracking-widest hover:text-blue-400 text-sm transition-colors mb-16">
+        <ArrowLeft size={24} /> Return to Portfolio
+      </button>
+
+      <div className="relative h-[600px] rounded-[4rem] overflow-hidden mb-24 group shadow-2xl">
+        <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale-0 group-hover:scale-105 transition-transform duration-1000" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+        <div className="absolute bottom-16 left-16 right-16">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black tracking-widest uppercase mb-6">Case Study</span>
+          <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-4">{project.title}</h1>
+          <p className="text-2xl text-blue-400 font-bold uppercase tracking-tight">{project.tagline}</p>
+        </div>
+      </div>
+
+      <div className="grid lg:grid-cols-3 gap-24">
+        <div className="lg:col-span-2 space-y-24">
+          <section>
+            <div className="flex items-center gap-6 mb-8">
+              <div className="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500"><Zap size={24}/></div>
+              <h2 className="text-3xl font-black uppercase tracking-tight">The Friction</h2>
+            </div>
+            <p className="text-xl text-gray-400 leading-relaxed font-medium">{project.problem}</p>
+          </section>
+
+          <section>
+            <div className="flex items-center gap-6 mb-8">
+              <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500"><Cpu size={24}/></div>
+              <h2 className="text-3xl font-black uppercase tracking-tight">Strategic Response</h2>
+            </div>
+            <p className="text-xl text-gray-400 leading-relaxed font-medium">{project.solution}</p>
+          </section>
+
+          <section className="p-12 bg-blue-600 rounded-[3rem] text-white shadow-2xl relative overflow-hidden">
+            <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 0.1 }} className="absolute inset-0 bg-black"></motion.div>
+            <div className="relative z-10">
+              <div className="flex items-center gap-6 mb-8">
+                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white"><Award size={24}/></div>
+                <h2 className="text-3xl font-black uppercase tracking-tight">Persistence & Outcome</h2>
+              </div>
+              <p className="text-2xl font-black italic mb-8">"{project.outcome}"</p>
+              <div className="h-1.5 w-24 bg-white/30 rounded-full"></div>
+            </div>
+          </section>
+        </div>
+
+        <div className="space-y-16">
+          <div className="p-10 bg-white/5 border border-white/10 rounded-[3rem] sticky top-32">
+            <h3 className="text-xl font-black uppercase tracking-widest mb-10 flex items-center gap-4 text-white">
+              <Terminal size={20} className="text-blue-500" /> Stack Ledger
+            </h3>
+            <div className="flex flex-wrap gap-3">
+              {project.techStack.map(tech => (
+                <span key={tech} className="px-5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-gray-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+            
+            <div className="mt-16 space-y-8 border-t border-white/5 pt-10">
+              <div className="flex items-center gap-4">
+                <Shield size={20} className="text-blue-500" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Secure Protocol Verified</span>
+              </div>
+              <div className="flex items-center gap-4">
+                <Globe size={20} className="text-blue-500" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Live persistence online</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Projects = ({ onSelectProject }: { onSelectProject: (p: Project) => void }) => (
   <section id="projects" className="section-padding bg-[#0a0a0a]">
     <div className="max-w-7xl mx-auto px-6">
       <SectionHeading 
@@ -662,22 +729,22 @@ const Projects = () => (
                   <div className="w-8 h-8 bg-blue-600/10 rounded-lg flex items-center justify-center text-blue-500"><Zap size={16}/></div>
                   <h4 className="text-xs font-black text-white uppercase tracking-widest">Problem</h4>
                 </div>
-                <p className="text-gray-400 text-base leading-relaxed font-medium">{project.problem}</p>
+                <p className="text-gray-400 text-base leading-relaxed font-medium line-clamp-3">{project.problem}</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-blue-600/10 rounded-lg flex items-center justify-center text-blue-500"><Code size={16}/></div>
                   <h4 className="text-xs font-black text-white uppercase tracking-widest">Architectural Solution</h4>
                 </div>
-                <p className="text-gray-400 text-base leading-relaxed font-medium">{project.solution}</p>
+                <p className="text-gray-400 text-base leading-relaxed font-medium line-clamp-3">{project.solution}</p>
               </div>
               <div className="p-6 bg-blue-600/5 rounded-2xl border border-blue-500/10 transition-colors group-hover:bg-blue-600/10">
                 <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Impact Outcome</h4>
-                <p className="text-white text-base font-bold italic">"{project.outcome}"</p>
+                <p className="text-white text-base font-bold italic line-clamp-2">"{project.outcome}"</p>
               </div>
             </div>
             <div className="px-10 pb-10">
-              <button className="w-full py-5 bg-white text-black text-sm font-black uppercase rounded-2xl hover:bg-gray-200 transition-all shadow-lg active:scale-95 tracking-widest">View Case Study</button>
+              <button onClick={() => onSelectProject(project)} className="w-full py-5 bg-white text-black text-sm font-black uppercase rounded-2xl hover:bg-gray-200 transition-all shadow-lg active:scale-95 tracking-widest">View Case Study</button>
             </div>
           </motion.div>
         ))}
@@ -726,7 +793,6 @@ const About = () => (
           </div>
         </motion.div>
         
-        {/* Dynamic Skills Distribution Matrix */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.9, x: 30 }} 
           whileInView={{ opacity: 1, scale: 1, x: 0 }} 
@@ -752,7 +818,6 @@ const About = () => (
   </section>
 );
 
-// --- AI Vision Studio Component ---
 const AIVisionStudio = () => {
   const [sourceImage, setSourceImage] = useState<string | null>(null);
   const [resultImage, setResultImage] = useState<string | null>(null);
@@ -890,19 +955,18 @@ const Blog = ({ selectedPost, setSelectedPost }: { selectedPost: BlogPost | null
   const [posts] = useState<BlogPost[]>(INITIAL_BLOG_POSTS);
   
   useEffect(() => {
-    updateMetaTags(selectedPost || undefined);
+    if (selectedPost) {
+      updateMetaTags(selectedPost.title, selectedPost.excerpt, selectedPost.image);
+    } else {
+      updateMetaTags();
+    }
   }, [selectedPost]);
 
   const handleShare = (post: BlogPost) => {
     if (navigator.share) {
-      navigator.share({
-        title: post.title,
-        text: post.excerpt,
-        url: window.location.href,
-      }).catch(err => console.error("Share failed", err));
+      navigator.share({ title: post.title, text: post.excerpt, url: window.location.href }).catch(err => console.error("Share failed", err));
     } else {
       navigator.clipboard.writeText(window.location.href);
-      BackendService.log(`Link copied to clipboard for: ${post.title}`, 'INFO');
       alert("Link copied to clipboard!");
     }
   };
@@ -1062,7 +1126,6 @@ const Contact = () => {
                 </div>
                 <h3 className="text-3xl font-black uppercase mb-4">Transmission Success</h3>
                 <p className="text-gray-600 font-medium mb-8">Your request has been prioritized and logged in our secure persistence layer.</p>
-                
                 {analysis && (
                   <div className="bg-white p-6 rounded-3xl border border-gray-200 text-left mb-8 shadow-sm">
                     <h4 className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-2">
@@ -1080,10 +1143,8 @@ const Contact = () => {
                         </p>
                       </div>
                     </div>
-                    <p className="text-xs text-gray-500 italic">"{analysis.summary}"</p>
                   </div>
                 )}
-                
                 <button onClick={() => setSubmitted(false)} className="text-sm font-black text-gray-400 uppercase tracking-widest hover:text-black transition-colors">Submit Another Lead</button>
               </motion.div>
             )}
@@ -1112,29 +1173,47 @@ const Footer = () => (
 
 const App: React.FC = () => {
   const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
-  const onNavClick = () => setSelectedPost(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+  const handleNavAction = (href?: string) => {
+    setSelectedPost(null);
+    setSelectedProject(null);
+    if (href) {
+      setTimeout(() => {
+        const element = document.getElementById(href);
+        if (element) element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     BackendService.log("Platform cold-start sequence initiated.", "SYSTEM");
     BackendService.log("Initializing secure persistence modules...", "INFO");
-    BackendService.log("SEO Metadata Engine online.", "INFO");
     BackendService.log("System Ready.", "SYSTEM");
-    
-    // Initial Meta Tags Set
     updateMetaTags();
   }, []);
 
   return (
     <div className="min-h-screen text-white font-inter selection:bg-blue-500 selection:text-white bg-[#0a0a0a]">
-      <Navbar onNavClick={onNavClick} />
+      <Navbar onNavAction={handleNavAction} />
       <main>
-        <Hero />
-        <AdvisoryHighlight />
-        <Projects />
-        <About />
-        <AIVisionStudio />
-        <Blog selectedPost={selectedPost} setSelectedPost={setSelectedPost} />
-        <Contact />
+        <AnimatePresence mode="wait">
+          {selectedPost ? (
+            <Blog selectedPost={selectedPost} setSelectedPost={setSelectedPost} />
+          ) : selectedProject ? (
+            <ProjectDetail project={selectedProject} onBack={() => setSelectedProject(null)} />
+          ) : (
+            <>
+              <Hero onNavAction={handleNavAction} />
+              <AdvisoryHighlight />
+              <Projects onSelectProject={(p) => setSelectedProject(p)} />
+              <About />
+              <AIVisionStudio />
+              <Blog selectedPost={null} setSelectedPost={setSelectedPost} />
+              <Contact />
+            </>
+          )}
+        </AnimatePresence>
       </main>
       <Footer />
     </div>
