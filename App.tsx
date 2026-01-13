@@ -12,15 +12,10 @@ import {
   Menu, 
   X, 
   ArrowRight,
-  ExternalLink,
   ChevronRight,
   Award,
-  BookOpen,
-  Plus,
   Calendar,
   User,
-  Tag,
-  Search,
   ArrowLeft,
   Image as ImageIcon,
   Wand2,
@@ -31,22 +26,14 @@ import {
   Sparkles,
   Target,
   FileCheck,
-  ZapOff,
-  BarChart3,
   Terminal,
   Activity,
-  Server,
   Share2,
-  Layers,
-  Fingerprint,
-  Globe,
-  Database,
-  Lock,
-  Box
+  Globe
 } from 'lucide-react';
 import { GoogleGenAI } from "@google/genai";
-import { SKILLS, EXPERIENCE, PROJECTS, CERTIFICATIONS, INITIAL_BLOG_POSTS } from './constants';
-import { ExperienceItem, Project, Skill, BlogPost, SystemLog, ContactSubmission } from './types';
+import { SKILLS, PROJECTS, INITIAL_BLOG_POSTS } from './constants';
+import { Project, BlogPost, SystemLog, ContactSubmission } from './types';
 import { api, BackendService } from './api';
 
 // --- Animation Variants ---
@@ -64,7 +51,6 @@ const staggerContainer = {
   }
 };
 
-// --- Skills Radar Matrix Component ---
 const SkillsRadar = () => {
   const categories = Array.from(new Set(SKILLS.map(s => s.category)));
   const data = categories.map(cat => {
@@ -77,7 +63,6 @@ const SkillsRadar = () => {
   const center = size / 2;
   const radius = center * 0.7;
 
-  // Calculate polygon points
   const points = data.map((d, i) => {
     const angle = (Math.PI * 2 * i) / data.length - Math.PI / 2;
     const x = center + radius * (d.value / 100) * Math.cos(angle);
@@ -85,7 +70,6 @@ const SkillsRadar = () => {
     return `${x},${y}`;
   }).join(' ');
 
-  // Calculate label positions
   const labels = data.map((d, i) => {
     const angle = (Math.PI * 2 * i) / data.length - Math.PI / 2;
     const x = center + (radius + 40) * Math.cos(angle);
@@ -185,10 +169,10 @@ const SkillsRadar = () => {
               <div className="p-2 bg-blue-600/20 rounded-lg border border-blue-500/30 mb-2">
                 <Icon size={14} className="text-blue-400" />
               </div>
-              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1">
+              <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest leading-none mb-1 heading-font">
                 {l.name}
               </span>
-              <span className="text-xs font-bold text-white">
+              <span className="text-xs font-bold text-white accent-font">
                 {Math.round(data[i].value)}% Mastery
               </span>
             </motion.div>
@@ -199,7 +183,7 @@ const SkillsRadar = () => {
       <div className="mt-8 text-center relative z-10">
         <div className="flex items-center justify-center gap-2 mb-2">
           <Activity size={12} className="text-blue-500" />
-          <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">Global Expertise Ledger</span>
+          <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest heading-font">Global Expertise Ledger</span>
         </div>
         <p className="text-xs text-gray-500 font-medium max-w-[200px]">
           Live telemetry mapping technical proficiency across primary system sectors.
@@ -209,75 +193,14 @@ const SkillsRadar = () => {
   );
 };
 
-// --- Gemini Integration ---
-const handleImageEdit = async (base64Image: string, prompt: string, mimeType: string) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const base64Data = base64Image.split(',')[1];
-
-  const response = await ai.models.generateContent({
-    model: 'gemini-2.5-flash-image',
-    contents: {
-      parts: [
-        {
-          inlineData: {
-            data: base64Data,
-            mimeType: mimeType,
-          },
-        },
-        {
-          text: prompt,
-        },
-      ],
-    },
-  });
-
-  for (const part of response.candidates[0].content.parts) {
-    if (part.inlineData) {
-      return `data:${mimeType};base64,${part.inlineData.data}`;
-    }
-  }
-  throw new Error("No image returned from AI model.");
-};
-
-const getDynamicSuggestions = async (base64Image: string, mimeType: string) => {
-  const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
-  const base64Data = base64Image.split(',')[1];
-
-  const response = await ai.models.generateContent({
-    model: 'gemini-3-flash-preview',
-    contents: {
-      parts: [
-        {
-          inlineData: {
-            data: base64Data,
-            mimeType: mimeType,
-          },
-        },
-        {
-          text: "Analyze this image and provide 5 brief, creative, and professional technical directives to edit it. Focus on lighting, environment, or style. Return ONLY a bulleted list of prompts, no other text. Keep each prompt under 8 words.",
-        },
-      ],
-    },
-  });
-
-  const text = response.text || "";
-  return text.split('\n')
-    .map(line => line.replace(/^[*-•\d.]+\s*/, '').trim())
-    .filter(line => line.length > 0)
-    .slice(0, 5);
-};
-
-/**
- * Robust SEO & Open Graph Metadata management.
- */
 const updateMetaTags = (titleSuffix?: string, description?: string, image?: string) => {
   if (typeof document === 'undefined') return;
 
-  const defaultTitle = "Samson Mbugua | Strategic Systems Advisor & Cyber Defense";
-  const defaultDesc = "High-credibility technical founder and cybersecurity specialist architecting secure, scalable digital systems.";
+  const defaultTitle = "Samson Mbugua | Cyber Defense Expert & Strategic Advisor";
+  const defaultDesc = "I design and build secure, scalable digital ecosystems across fintech, insurance, and mobility, blending technical expertise with strategic vision.";
   const title = titleSuffix ? `${titleSuffix} | Samson Mbugua` : defaultTitle;
   const desc = description || defaultDesc;
-  const img = image || "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=1200";
+  const img = image || "Pro photo.png";
 
   document.title = title;
 
@@ -286,7 +209,9 @@ const updateMetaTags = (titleSuffix?: string, description?: string, image?: stri
     { property: "og:title", content: title },
     { property: "og:description", content: desc },
     { property: "og:image", content: img },
+    { property: "og:type", content: "article" },
     { property: "og:url", content: window.location.href },
+    { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: title },
     { name: "twitter:description", content: desc },
     { name: "twitter:image", content: img },
@@ -304,7 +229,6 @@ const updateMetaTags = (titleSuffix?: string, description?: string, image?: stri
   });
 };
 
-// --- System Terminal Component ---
 const SystemTerminal = () => {
   const [logs, setLogs] = useState<SystemLog[]>([]);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -323,7 +247,7 @@ const SystemTerminal = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between mb-4">
         <div className="flex items-center gap-3 text-blue-500">
           <Terminal size={14} />
-          <span className="font-black uppercase tracking-widest">Backend Systems Ledger</span>
+          <span className="font-black uppercase tracking-widest heading-font">Backend Systems Ledger</span>
         </div>
         <div className="flex items-center gap-4 text-gray-500">
           <div className="flex items-center gap-2">
@@ -333,7 +257,7 @@ const SystemTerminal = () => {
           <span>Uptime: 99.99%</span>
         </div>
       </div>
-      <div ref={scrollRef} className="h-24 overflow-y-auto space-y-1 custom-scrollbar">
+      <div ref={scrollRef} className="h-24 overflow-y-auto space-y-1 custom-scrollbar accent-font">
         {logs.map(log => (
           <div key={log.id} className="flex gap-4">
             <span className="text-gray-600">[{new Date(log.timestamp).toLocaleTimeString()}]</span>
@@ -348,7 +272,6 @@ const SystemTerminal = () => {
   );
 };
 
-// --- Navbar Component ---
 const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -378,7 +301,7 @@ const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a0a0a]/90 backdrop-blur-md border-b border-white/10 py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-        <a href="#home" onClick={(e) => handleLinkClick(e, 'home')} className="text-xl font-bold tracking-tighter text-white">
+        <a href="#home" onClick={(e) => handleLinkClick(e, 'home')} className="text-xl font-black tracking-tighter text-white heading-font">
           SAMSON <span className="text-blue-500">MBUGUA</span>
         </a>
 
@@ -388,7 +311,7 @@ const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
               key={link.name} 
               href={`#${link.href}`} 
               onClick={(e) => handleLinkClick(e, link.href)}
-              className="text-xs font-semibold text-gray-400 hover:text-white transition-colors duration-300"
+              className="text-xs font-bold text-gray-400 hover:text-white transition-colors duration-300 heading-font uppercase tracking-widest"
             >
               {link.name}
             </a>
@@ -414,7 +337,7 @@ const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
                 key={link.name} 
                 href={`#${link.href}`} 
                 onClick={(e) => handleLinkClick(e, link.href)}
-                className="text-lg font-bold text-gray-300 hover:text-white border-b border-white/5 pb-2"
+                className="text-lg font-bold text-gray-300 hover:text-white border-b border-white/5 pb-2 heading-font uppercase"
               >
                 {link.name}
               </a>
@@ -426,7 +349,6 @@ const Navbar = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
   );
 };
 
-// --- Generic Section Header ---
 const SectionHeading = ({ title, subtitle, action, dark = false }: { title: string; subtitle?: string; action?: React.ReactNode; dark?: boolean }) => (
   <motion.div 
     initial={{ opacity: 0, y: 20 }}
@@ -436,7 +358,7 @@ const SectionHeading = ({ title, subtitle, action, dark = false }: { title: stri
     className="mb-16 flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
   >
     <div className="flex-grow">
-      <h2 className={`text-3xl md:text-5xl font-black mb-4 tracking-tight uppercase ${dark ? 'text-black' : 'text-white'}`}>{title}</h2>
+      <h2 className={`text-3xl md:text-5xl font-black mb-4 tracking-tight uppercase heading-font ${dark ? 'text-black' : 'text-white'}`}>{title}</h2>
       {subtitle && <p className={`max-w-2xl text-lg leading-relaxed ${dark ? 'text-gray-700' : 'text-gray-400'}`}>{subtitle}</p>}
       <motion.div 
         initial={{ width: 0 }}
@@ -450,91 +372,96 @@ const SectionHeading = ({ title, subtitle, action, dark = false }: { title: stri
   </motion.div>
 );
 
-const Hero = ({ onNavAction }: { onNavAction: (href?: string) => void }) => (
-  <section id="home" className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-    <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: "easeOut" }}
-        className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-blue-900/10 blur-[150px] rounded-full"
-      ></motion.div>
-    </div>
-    <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-20 items-center">
-      <motion.div 
-        variants={staggerContainer}
-        initial="initial"
-        animate="animate"
-      >
-        <motion.span 
-          variants={fadeInUp}
-          className="inline-block px-4 py-1.5 rounded-full bg-blue-950/50 border border-blue-500/30 text-blue-400 text-xs font-black tracking-[0.2em] uppercase mb-8"
-        >
-          Strategic Systems Advisor
-        </motion.span>
-        <motion.h1 
-          variants={fadeInUp}
-          className="text-6xl md:text-8xl font-black mb-6 leading-[0.95] tracking-tighter text-white"
-        >
-          Samson <br /> Mbugua
-        </motion.h1>
-        <motion.h2 
-          variants={fadeInUp}
-          className="text-xl md:text-3xl text-gray-400 font-medium mb-10 max-w-xl leading-tight"
-        >
-          Cyber Defense <span className="text-gray-700 mx-2">/</span> Software Founder <span className="text-gray-700 mx-2">/</span> Strategic Advisory
-        </motion.h2>
-        <motion.p 
-          variants={fadeInUp}
-          className="text-lg md:text-xl text-gray-500 max-w-xl mb-12 leading-relaxed font-medium"
-        >
-          Architecting secure, scalable digital ecosystems across fintech, insurance, and mobility. I help founders make confident technical decisions.
-        </motion.p>
+const Hero = ({ onNavAction }: { onNavAction: (href?: string) => void }) => {
+  return (
+    <section id="home" className="relative min-h-screen flex items-center pt-24 overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
         <motion.div 
-          variants={fadeInUp}
-          className="flex flex-wrap gap-5"
-        >
-          <button onClick={() => onNavAction('projects')} className="px-10 py-5 bg-white text-black font-black rounded-xl hover:bg-gray-200 hover:-translate-y-1 transition-all flex items-center group shadow-xl uppercase tracking-widest text-sm">
-            View Projects <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="px-10 py-5 bg-transparent border border-white/20 text-white font-black rounded-xl hover:bg-white/5 hover:-translate-y-1 transition-all uppercase tracking-widest text-sm">
-            Book a Strategy Session
-          </a>
-        </motion.div>
-      </motion.div>
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.95, x: 20 }}
-        animate={{ opacity: 1, scale: 1, x: 0 }}
-        transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
-        className="hidden lg:block relative"
-      >
-        <div className="aspect-[3/4] bg-gradient-to-br from-gray-800 to-black rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl p-1">
-          <img 
-            src="https://photos.app.goo.gl/zdSX5Z9BEHqMu1E47" 
-            alt="Samson Mbugua - Strategic Advisor" 
-            className="w-full h-full object-cover rounded-[3.8rem] contrast-105 saturate-110"
-          />
-        </div>
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-blue-900/10 blur-[180px] rounded-full"
+        ></motion.div>
+      </div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-20 items-center">
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1, duration: 0.6 }}
-          className="absolute -bottom-10 -left-10 bg-blue-600 p-8 rounded-3xl border border-white/10 shadow-2xl"
+          variants={staggerContainer}
+          initial="initial"
+          animate="animate"
         >
-          <p className="text-4xl font-black text-white leading-none">Senior</p>
-          <p className="text-[10px] font-black text-blue-100 opacity-80 uppercase tracking-widest mt-2">Systems Architect</p>
+          <motion.div 
+            variants={fadeInUp}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-blue-600/10 border border-blue-500/30 text-blue-400 text-[11px] font-bold tracking-[0.25em] uppercase mb-10 accent-font"
+          >
+            Strategic Systems Advisor
+          </motion.div>
+          <motion.h1 
+            variants={fadeInUp}
+            className="text-7xl md:text-9xl font-black mb-8 leading-[0.85] tracking-tighter text-gradient heading-font"
+          >
+            Samson <br /> Mbugua
+          </motion.h1>
+          <motion.h2 
+            variants={fadeInUp}
+            className="text-2xl md:text-4xl text-gray-400 font-medium mb-12 max-w-xl leading-tight heading-font"
+          >
+            Cyber Defense Expert <span className="text-gray-800 mx-2">/</span> Software Founder <span className="text-gray-800 mx-2">/</span> Strategic Advisor
+          </motion.h2>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg md:text-xl text-gray-500 max-w-xl mb-14 leading-relaxed font-medium"
+          >
+            Designing and building secure, scalable digital ecosystems across fintech, insurance, and mobility, blending technical expertise with strategic vision.
+          </motion.p>
+          <motion.div 
+            variants={fadeInUp}
+            className="flex flex-wrap gap-6"
+          >
+            <button onClick={() => onNavAction('projects')} className="px-10 py-6 bg-blue-600 text-white font-bold rounded-2xl hover:bg-blue-700 hover:-translate-y-1 transition-all flex items-center group shadow-2xl uppercase tracking-widest text-sm accent-font">
+              View Projects <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </button>
+            <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="px-10 py-6 bg-transparent border border-white/20 text-white font-bold rounded-2xl hover:bg-white/5 hover:-translate-y-1 transition-all uppercase tracking-widest text-sm accent-font">
+              Book a Strategy Session
+            </a>
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </div>
-  </section>
-);
+        
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.9, x: 50 }}
+          animate={{ opacity: 1, scale: 1, x: 0 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          className="hidden lg:block relative justify-self-center"
+        >
+          <div className="relative group p-4">
+            <div className="absolute inset-0 bg-blue-600/20 rounded-[3rem] blur-2xl transform group-hover:scale-110 transition-transform duration-700"></div>
+            <img 
+              src="Pro photo.png"
+              alt="Samson Mbugua" 
+              className="w-[300px] h-auto object-cover rounded-[3rem] border border-white/10 shadow-[0_50px_100px_rgba(0,0,0,0.5)] relative z-10 contrast-[1.05] saturate-[1.02]"
+            />
+          </div>
+          
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+            className="absolute -bottom-8 -left-8 bg-blue-600 p-8 rounded-[2.5rem] border border-white/10 shadow-[0_30px_60px_rgba(37,99,235,0.4)] z-20"
+          >
+            <p className="text-4xl font-black text-white leading-none tracking-tighter heading-font">Senior</p>
+            <p className="text-[12px] font-bold text-blue-100 opacity-90 uppercase tracking-[0.35em] mt-3 accent-font">Systems Architect</p>
+          </motion.div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
 
 const AdvisoryHighlight = () => (
   <section id="advisory" className="section-padding bg-white text-black">
     <div className="max-w-7xl mx-auto px-6">
       <SectionHeading 
         title="Strategic Systems Advisory" 
-        subtitle="I work with founders, operators, and organizations navigating complex technical, security, and product decisions."
+        subtitle="I help founders, startups, and enterprises make confident technical decisions, optimize workflows, and implement innovative solutions."
         dark
       />
       <motion.div 
@@ -552,14 +479,14 @@ const AdvisoryHighlight = () => (
           <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
             <Shield size={32} />
           </div>
-          <h3 className="text-2xl font-black uppercase tracking-tight">Security Architecture</h3>
-          <p className="text-gray-600 leading-relaxed font-medium">
-            Secure system architecture reviews for fintech and insurtech platforms. We identify vulnerabilities before they become liabilities.
+          <h3 className="text-2xl font-black uppercase tracking-tight heading-font">Security Architecture</h3>
+          <p className="text-gray-700 leading-relaxed font-medium">
+            Reviewing system architectures for fintech and insurtech platforms to ensure robust security and data integrity.
           </p>
           <ul className="space-y-4">
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> Risk Assessment</li>
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> Data Integrity Audits</li>
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> Compliance Mapping</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> Risk Assessment</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> Vulnerability Audit</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> Compliance Mapping</li>
           </ul>
         </motion.div>
 
@@ -571,14 +498,14 @@ const AdvisoryHighlight = () => (
           <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl group-hover:scale-110 transition-transform">
             <Target size={32} />
           </div>
-          <h3 className="text-2xl font-black uppercase tracking-tight">Product Strategy</h3>
-          <p className="text-gray-600 leading-relaxed font-medium">
-            Helping founders design systems that scale. From technical due diligence to AI workflow orchestration.
+          <h3 className="text-2xl font-black uppercase tracking-tight heading-font">Growth Strategy</h3>
+          <p className="text-gray-700 leading-relaxed font-medium">
+            Leveraging SEO and Inbound Marketing certifications to bridge technical development with measurable growth.
           </p>
           <ul className="space-y-4">
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> Scalability Roadmaps</li>
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> AI/ML Integration</li>
-            <li className="flex items-center text-sm font-bold text-gray-500"><ChevronRight size={16} className="text-blue-600 mr-2"/> Technical Due Diligence</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> Technical SEO</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> HubSpot Automation</li>
+            <li className="flex items-center text-sm font-bold text-gray-500 accent-font"><ChevronRight size={16} className="text-blue-600 mr-2"/> Funnel Optimization</li>
           </ul>
         </motion.div>
 
@@ -595,13 +522,13 @@ const AdvisoryHighlight = () => (
           <div className="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-xl relative z-10 group-hover:scale-110 transition-transform">
             <Zap size={32} />
           </div>
-          <h3 className="text-2xl font-black uppercase tracking-tight relative z-10">Founder Access</h3>
+          <h3 className="text-2xl font-black uppercase tracking-tight relative z-10 heading-font">Founder Advisory</h3>
           <p className="text-gray-300 leading-relaxed font-medium opacity-80 relative z-10">
-            Ongoing strategic access for high-priority decisions. Outcome-driven advisory focused on execution clarity and risk reduction.
+            Dedicated technical due diligence and high-priority orchestration for founders scaling disruptive tech products.
           </p>
           <div className="pt-4 relative z-10">
-            <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 font-black uppercase text-xs tracking-widest hover:text-blue-300 transition-colors">
-              Apply for Founder Access <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+            <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-blue-400 font-bold uppercase text-xs tracking-widest hover:text-blue-300 transition-colors accent-font">
+              Partner with Samson <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </a>
           </div>
         </motion.div>
@@ -612,7 +539,7 @@ const AdvisoryHighlight = () => (
 
 const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => void }) => {
   useEffect(() => {
-    updateMetaTags(project.title, project.tagline, project.image);
+    updateMetaTags(project.title, project.problem, project.image);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [project]);
 
@@ -623,17 +550,17 @@ const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => vo
       exit={{ opacity: 0, x: -20 }} 
       className="max-w-6xl mx-auto px-6 py-20"
     >
-      <button onClick={onBack} className="flex items-center gap-4 text-blue-500 font-black uppercase tracking-widest hover:text-blue-400 text-sm transition-colors mb-16">
+      <button onClick={onBack} className="flex items-center gap-4 text-blue-500 font-black uppercase tracking-widest hover:text-blue-400 text-sm transition-colors mb-16 accent-font">
         <ArrowLeft size={24} /> Return to Portfolio
       </button>
 
       <div className="relative h-[600px] rounded-[4rem] overflow-hidden mb-24 group shadow-2xl">
-        <img src={project.image} alt={project.title} className="w-full h-full object-cover grayscale-0 group-hover:scale-105 transition-transform duration-1000" />
+        <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
         <div className="absolute bottom-16 left-16 right-16">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black tracking-widest uppercase mb-6">Case Study</span>
-          <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-4">{project.title}</h1>
-          <p className="text-2xl text-blue-400 font-bold uppercase tracking-tight">{project.tagline}</p>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-blue-600 text-white text-[10px] font-black tracking-widest uppercase mb-6 accent-font">Case Study</span>
+          <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.9] tracking-tighter mb-4 heading-font">{project.title}</h1>
+          <p className="text-2xl text-blue-400 font-bold uppercase tracking-tight accent-font">{project.tagline}</p>
         </div>
       </div>
 
@@ -642,15 +569,15 @@ const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => vo
           <section>
             <div className="flex items-center gap-6 mb-8">
               <div className="w-12 h-12 bg-red-600/10 rounded-xl flex items-center justify-center text-red-500"><Zap size={24}/></div>
-              <h2 className="text-3xl font-black uppercase tracking-tight">The Friction</h2>
+              <h2 className="text-3xl font-black uppercase tracking-tight heading-font">The Friction</h2>
             </div>
-            <p className="text-xl text-gray-400 leading-relaxed font-medium">{project.problem}</p>
+            <p className="text-xl text-gray-400 leading-relaxed font-medium italic">"{project.problem}"</p>
           </section>
 
           <section>
             <div className="flex items-center gap-6 mb-8">
               <div className="w-12 h-12 bg-blue-600/10 rounded-xl flex items-center justify-center text-blue-500"><Cpu size={24}/></div>
-              <h2 className="text-3xl font-black uppercase tracking-tight">Strategic Response</h2>
+              <h2 className="text-3xl font-black uppercase tracking-tight heading-font">Strategic Response</h2>
             </div>
             <p className="text-xl text-gray-400 leading-relaxed font-medium">{project.solution}</p>
           </section>
@@ -660,7 +587,7 @@ const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => vo
             <div className="relative z-10">
               <div className="flex items-center gap-6 mb-8">
                 <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-white"><Award size={24}/></div>
-                <h2 className="text-3xl font-black uppercase tracking-tight">Persistence & Outcome</h2>
+                <h2 className="text-3xl font-black uppercase tracking-tight heading-font">Persistence & Outcome</h2>
               </div>
               <p className="text-2xl font-black italic mb-8">"{project.outcome}"</p>
               <div className="h-1.5 w-24 bg-white/30 rounded-full"></div>
@@ -670,26 +597,15 @@ const ProjectDetail = ({ project, onBack }: { project: Project, onBack: () => vo
 
         <div className="space-y-16">
           <div className="p-10 bg-white/5 border border-white/10 rounded-[3rem] sticky top-32">
-            <h3 className="text-xl font-black uppercase tracking-widest mb-10 flex items-center gap-4 text-white">
+            <h3 className="text-xl font-black uppercase tracking-widest mb-10 flex items-center gap-4 text-white heading-font">
               <Terminal size={20} className="text-blue-500" /> Stack Ledger
             </h3>
             <div className="flex flex-wrap gap-3">
               {project.techStack.map(tech => (
-                <span key={tech} className="px-5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-xs font-black uppercase tracking-widest text-gray-300">
+                <span key={tech} className="px-5 py-2.5 bg-black/40 border border-white/10 rounded-xl text-xs font-bold uppercase tracking-widest text-gray-300 accent-font">
                   {tech}
                 </span>
               ))}
-            </div>
-            
-            <div className="mt-16 space-y-8 border-t border-white/5 pt-10">
-              <div className="flex items-center gap-4">
-                <Shield size={20} className="text-blue-500" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Secure Protocol Verified</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <Globe size={20} className="text-blue-500" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-gray-500">Live persistence online</span>
-              </div>
             </div>
           </div>
         </div>
@@ -719,32 +635,28 @@ const Projects = ({ onSelectProject }: { onSelectProject: (p: Project) => void }
               <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000" />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/20 to-transparent"></div>
               <div className="absolute bottom-8 left-10 right-10">
-                <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-2">{project.title}</h3>
-                <p className="text-blue-500 text-xs font-black uppercase tracking-[0.2em]">{project.tagline}</p>
+                <h3 className="text-3xl font-black text-white uppercase tracking-tighter leading-none mb-2 heading-font">{project.title}</h3>
+                <p className="text-blue-500 text-xs font-bold uppercase tracking-[0.2em] accent-font">{project.tagline}</p>
               </div>
             </div>
             <div className="p-10 flex-grow space-y-10">
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-blue-600/10 rounded-lg flex items-center justify-center text-blue-500"><Zap size={16}/></div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-widest">Problem</h4>
+                  <h4 className="text-xs font-black text-white uppercase tracking-widest heading-font">Problem</h4>
                 </div>
-                <p className="text-gray-400 text-base leading-relaxed font-medium line-clamp-3">{project.problem}</p>
+                <p className="text-gray-400 text-base leading-relaxed font-medium line-clamp-3 italic">"{project.problem}"</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 bg-blue-600/10 rounded-lg flex items-center justify-center text-blue-500"><Code size={16}/></div>
-                  <h4 className="text-xs font-black text-white uppercase tracking-widest">Architectural Solution</h4>
+                  <h4 className="text-xs font-black text-white uppercase tracking-widest heading-font">Architectural Solution</h4>
                 </div>
                 <p className="text-gray-400 text-base leading-relaxed font-medium line-clamp-3">{project.solution}</p>
               </div>
-              <div className="p-6 bg-blue-600/5 rounded-2xl border border-blue-500/10 transition-colors group-hover:bg-blue-600/10">
-                <h4 className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Impact Outcome</h4>
-                <p className="text-white text-base font-bold italic line-clamp-2">"{project.outcome}"</p>
-              </div>
             </div>
             <div className="px-10 pb-10">
-              <button onClick={() => onSelectProject(project)} className="w-full py-5 bg-white text-black text-sm font-black uppercase rounded-2xl hover:bg-gray-200 transition-all shadow-lg active:scale-95 tracking-widest">View Case Study</button>
+              <button onClick={() => onSelectProject(project)} className="w-full py-5 bg-white text-black text-sm font-bold uppercase rounded-2xl hover:bg-blue-600 hover:text-white transition-all shadow-lg active:scale-95 tracking-widest accent-font">View Case Study</button>
             </div>
           </motion.div>
         ))}
@@ -763,16 +675,16 @@ const About = () => (
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <SectionHeading title="Executive Profile" subtitle="Technologist. Founder. Cyber Defense Specialist." />
+          <SectionHeading title="Executive Profile" subtitle="Technologist. Founder. Cyber Defense Expert." />
           <div className="space-y-8 text-gray-400 text-xl leading-relaxed font-medium mb-16">
             <p>
-              I bridge the gap between abstract technical complexity and executive-level business results. My background in 
-              <span className="text-white font-bold px-1 underline decoration-blue-500/50">Information Assurance & CIS</span> 
-              defines my approach: security is not a layer, it is the foundation.
+              I design and build secure, scalable digital ecosystems across fintech, insurance, and mobility, blending technical expertise with strategic vision. With a background in <span className="text-white font-bold">Information Assurance and Computer Information Systems</span>, I help founders, startups, and enterprises make confident technical decisions, optimize workflows, and implement innovative solutions.
             </p>
             <p>
-              From founding 
-              <span className="text-white font-bold">Hpalls Corporation</span> to advisory for fintech teams, my focus is on designing digital systems that are secure by design, scalable by nature, and inclusive in impact.
+              As an <span className="text-blue-500 font-bold underline decoration-blue-500/50">SEO-certified</span> and <span className="text-blue-500 font-bold underline decoration-blue-500/50">HubSpot Inbound Marketing-certified</span> professional, I combine cybersecurity, software development, and growth strategy to deliver measurable results. My experience spans AI web application reviews, email optimization, workflow automation, and creating web curricula—enabling businesses to leverage technology for sustainable growth.
+            </p>
+            <p>
+              I’m passionate about <span className="text-white font-bold">Web3, blockchain, and emerging technologies</span>, helping organizations navigate complex technical landscapes while building future-ready digital products.
             </p>
             <motion.div 
               variants={staggerContainer}
@@ -782,12 +694,12 @@ const About = () => (
               className="pt-6 grid grid-cols-2 gap-8"
             >
               <motion.div variants={fadeInUp}>
-                <h4 className="text-blue-500 font-black text-4xl mb-2">3.8</h4>
-                <p className="text-xs font-black text-gray-600 uppercase tracking-widest">GPA (Information Assurance)</p>
+                <h4 className="text-blue-500 font-black text-4xl mb-2 heading-font">3.8</h4>
+                <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest accent-font">GPA (Information Assurance)</p>
               </motion.div>
               <motion.div variants={fadeInUp}>
-                <h4 className="text-blue-500 font-black text-4xl mb-2">5+</h4>
-                <p className="text-xs font-black text-gray-600 uppercase tracking-widest">Global Partnerships</p>
+                <h4 className="text-blue-500 font-black text-4xl mb-2 heading-font">5+</h4>
+                <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest accent-font">Global Partnerships</p>
               </motion.div>
             </motion.div>
           </div>
@@ -807,8 +719,8 @@ const About = () => (
                 whileHover={{ scale: 1.05 }}
                 className="p-4 bg-white/5 border border-white/10 rounded-2xl flex flex-col items-center gap-2 group cursor-default"
               >
-                <span className="text-[8px] font-black text-blue-500 uppercase tracking-widest group-hover:text-white transition-colors">Category {i+1}</span>
-                <span className="text-[10px] font-bold text-gray-300 text-center">{cat}</span>
+                <span className="text-[8px] font-black text-blue-500 uppercase tracking-widest group-hover:text-white transition-colors accent-font">Category {i+1}</span>
+                <span className="text-[10px] font-bold text-gray-300 text-center heading-font uppercase">{cat}</span>
               </motion.div>
             ))}
           </div>
@@ -857,8 +769,23 @@ const AIVisionStudio = () => {
     if (!sourceImage || !prompt) return;
     setIsGenerating(true);
     try {
-      const result = await handleImageEdit(sourceImage, prompt, mimeType);
-      setResultImage(result);
+      const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+      const base64Data = sourceImage.split(',')[1];
+      const response = await ai.models.generateContent({
+        model: 'gemini-2.5-flash-image',
+        contents: {
+          parts: [
+            { inlineData: { data: base64Data, mimeType: mimeType } },
+            { text: prompt },
+          ],
+        },
+      });
+
+      for (const part of response.candidates[0].content.parts) {
+        if (part.inlineData) {
+          setResultImage(`data:${mimeType};base64,${part.inlineData.data}`);
+        }
+      }
     } catch (error) {
       console.error(error);
       alert("AI Generation failed. Please try a different prompt.");
@@ -867,7 +794,22 @@ const AIVisionStudio = () => {
     }
   };
 
-  const activeSuggestions = dynamicSuggestions.length > 0 ? dynamicSuggestions : ["Futuristic filter", "Cyberpunk theme", "Neon lights"];
+  const getDynamicSuggestions = async (base64Image: string, mime: string) => {
+    const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+    const base64Data = base64Image.split(',')[1];
+    const response = await ai.models.generateContent({
+      model: 'gemini-3-flash-preview',
+      contents: {
+        parts: [
+          { inlineData: { data: base64Data, mimeType: mime } },
+          { text: "Analyze this image and provide 5 brief, professional technical directives to edit it. Focus on lighting, environment, or style. Return ONLY a bulleted list of prompts, no other text." },
+        ],
+      },
+    });
+    return (response.text || "").split('\n').map(l => l.replace(/^[*-•\d.]+\s*/, '').trim()).filter(l => l.length > 0).slice(0, 5);
+  };
+
+  const activeSuggestions = dynamicSuggestions.length > 0 ? dynamicSuggestions : ["Futuristic overlay", "Cyber Defense theme", "High-contrast render"];
 
   return (
     <section id="ai-studio" className="section-padding bg-[#0a0a0a]">
@@ -879,16 +821,16 @@ const AIVisionStudio = () => {
         <div className="grid lg:grid-cols-2 gap-12">
           <div className="space-y-8">
             <div className="p-10 bg-white/5 rounded-[3rem] border border-white/10 shadow-2xl backdrop-blur-md">
-              <h3 className="text-2xl font-black mb-8 flex items-center gap-4 text-white uppercase tracking-tight">
+              <h3 className="text-2xl font-black mb-8 flex items-center gap-4 text-white uppercase tracking-tight heading-font">
                 <Wand2 className="text-blue-500" size={32} /> Neural Directives
               </h3>
               <div className="space-y-8">
                 <div>
-                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">Input Buffer</label>
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 accent-font">Input Buffer</label>
                   {!sourceImage ? (
                     <div onClick={() => fileInputRef.current?.click()} className="h-56 border-2 border-dashed border-white/10 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:border-blue-500/50 hover:bg-white/5 transition-all group">
                       <Upload className="text-gray-600 group-hover:text-blue-500 mb-4" size={48} />
-                      <p className="text-sm font-bold text-gray-500 uppercase tracking-widest">Select Image Asset</p>
+                      <p className="text-sm font-bold text-gray-500 uppercase tracking-widest accent-font">Select Image Asset</p>
                       <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileUpload} />
                     </div>
                   ) : (
@@ -901,21 +843,21 @@ const AIVisionStudio = () => {
                   )}
                 </div>
                 <div>
-                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4">System Prompt</label>
-                  <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder="Enter technical directive..." className="w-full bg-black/40 border-2 border-white/10 rounded-2xl px-6 py-5 outline-none text-white font-medium focus:border-blue-500 transition-all min-h-[150px]" />
+                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 accent-font">System Prompt</label>
+                  <textarea value={prompt} onChange={(e) => setPrompt(e.target.value)} placeholder="Enter technical directive..." className="w-full bg-black/40 border-2 border-white/10 rounded-2xl px-6 py-5 outline-none text-white font-medium focus:border-blue-500 transition-all min-h-[150px] accent-font" />
                 </div>
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest">Contextual Suggestions</p>
+                    <p className="text-[10px] font-black text-gray-600 uppercase tracking-widest accent-font">Contextual Suggestions</p>
                     {isAnalyzing && <Sparkles className="text-blue-500 animate-pulse" size={16} />}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     {activeSuggestions.map(s => (
-                      <button key={s} onClick={() => setPrompt(s)} className={`px-4 py-2 border rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${dynamicSuggestions.length > 0 ? 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20' : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:border-blue-500/30'}`}>{s}</button>
+                      <button key={s} onClick={() => setPrompt(s)} className={`px-4 py-2 border rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all accent-font ${dynamicSuggestions.length > 0 ? 'bg-blue-600/10 border-blue-500/30 text-blue-400 hover:bg-blue-600/20' : 'bg-white/5 border-white/10 text-gray-500 hover:text-white hover:border-blue-500/30'}`}>{s}</button>
                     ))}
                   </div>
                 </div>
-                <button onClick={onGenerate} disabled={!sourceImage || !prompt || isGenerating} className="w-full py-6 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-800 disabled:text-gray-500 text-white font-black uppercase rounded-2xl transition-all shadow-xl flex items-center justify-center gap-4 active:scale-95 tracking-widest">
+                <button onClick={onGenerate} disabled={!sourceImage || !prompt || isGenerating} className="w-full py-6 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-800 disabled:text-gray-500 text-white font-black uppercase rounded-2xl transition-all shadow-xl flex items-center justify-center gap-4 active:scale-95 tracking-widest accent-font">
                   {isGenerating ? <><RefreshCw className="animate-spin" size={20} /> Processing...</> : <><Zap size={20} /> Synthesize</>}
                 </button>
               </div>
@@ -927,19 +869,19 @@ const AIVisionStudio = () => {
                 {isGenerating ? (
                   <motion.div key="l" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex flex-col items-center gap-8">
                     <div className="w-24 h-24 border-4 border-blue-500/20 rounded-full border-t-blue-500 animate-spin"></div>
-                    <p className="text-lg font-black uppercase tracking-widest text-white animate-pulse">Neural Render in Progress</p>
+                    <p className="text-lg font-black uppercase tracking-widest text-white animate-pulse heading-font">Neural Render in Progress</p>
                   </motion.div>
                 ) : resultImage ? (
                   <motion.div key="r" initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="relative w-full h-full p-8 flex flex-col items-center">
                     <img src={resultImage} className="max-w-full max-h-[400px] object-contain rounded-3xl shadow-2xl" alt="Result" />
                     <div className="mt-10 flex gap-6 w-full">
-                      <a href={resultImage} download className="flex-1 py-5 bg-white text-black text-xs font-black uppercase rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-200 transition-all shadow-xl tracking-widest"><Download size={18} /> Export Master</a>
+                      <a href={resultImage} download className="flex-1 py-5 bg-white text-black text-xs font-bold uppercase rounded-2xl flex items-center justify-center gap-3 hover:bg-gray-200 transition-all shadow-xl tracking-widest accent-font"><Download size={18} /> Export Master</a>
                     </div>
                   </motion.div>
                 ) : (
                   <div className="flex flex-col items-center text-center p-12 opacity-30">
                     <ImageIcon size={100} strokeWidth={1} />
-                    <p className="mt-6 text-xl font-black uppercase tracking-widest">Output Buffer Empty</p>
+                    <p className="mt-6 text-xl font-black uppercase tracking-widest heading-font">Output Buffer Empty</p>
                   </div>
                 )}
               </AnimatePresence>
@@ -977,7 +919,7 @@ const Blog = ({ selectedPost, setSelectedPost }: { selectedPost: BlogPost | null
         <AnimatePresence mode="wait">
           {!selectedPost ? (
             <motion.div key="l" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <SectionHeading title="Strategic Insights" subtitle="Deep dives into cybersecurity, systems architecture, and product logic." />
+              <SectionHeading title="Strategic Insights" subtitle="Deep dives into cybersecurity, systems architecture, and technical growth strategy." />
               <div className="grid md:grid-cols-3 gap-10">
                 {posts.map(post => (
                   <motion.article 
@@ -990,8 +932,8 @@ const Blog = ({ selectedPost, setSelectedPost }: { selectedPost: BlogPost | null
                       <img src={post.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" />
                     </div>
                     <div className="p-10 space-y-6">
-                      <span className="text-[10px] font-black text-blue-500 uppercase tracking-widest">{post.category}</span>
-                      <h3 className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors leading-tight">{post.title}</h3>
+                      <span className="text-[10px] font-bold text-blue-500 uppercase tracking-widest accent-font">{post.category}</span>
+                      <h3 className="text-2xl font-black text-white group-hover:text-blue-400 transition-colors leading-tight heading-font uppercase">{post.title}</h3>
                       <p className="text-gray-500 text-sm font-medium line-clamp-2">{post.excerpt}</p>
                     </div>
                   </motion.article>
@@ -1001,15 +943,15 @@ const Blog = ({ selectedPost, setSelectedPost }: { selectedPost: BlogPost | null
           ) : (
             <motion.div key="d" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} className="max-w-4xl mx-auto">
               <div className="flex items-center justify-between mb-12">
-                <button onClick={() => setSelectedPost(null)} className="flex items-center gap-4 text-blue-500 font-black uppercase tracking-widest hover:text-blue-400 text-sm transition-colors">
+                <button onClick={() => setSelectedPost(null)} className="flex items-center gap-4 text-blue-500 font-bold uppercase tracking-widest hover:text-blue-400 text-sm transition-colors accent-font">
                   <ArrowLeft size={24} /> Back to Insights
                 </button>
                 <button onClick={() => handleShare(selectedPost)} className="p-3 bg-white/5 hover:bg-white/10 rounded-full text-gray-400 hover:text-white transition-all">
                   <Share2 size={20} />
                 </button>
               </div>
-              <h1 className="text-5xl md:text-7xl font-black text-white mb-10 leading-tight tracking-tighter">{selectedPost.title}</h1>
-              <div className="flex gap-10 text-[10px] font-black text-gray-500 uppercase tracking-widest mb-16 border-b border-white/10 pb-10">
+              <h1 className="text-5xl md:text-7xl font-black text-white mb-10 leading-tight tracking-tighter heading-font uppercase">{selectedPost.title}</h1>
+              <div className="flex gap-10 text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-16 border-b border-white/10 pb-10 accent-font">
                 <span className="flex items-center gap-2"><Calendar size={14}/> {selectedPost.date}</span>
                 <span className="flex items-center gap-2"><User size={14}/> By {selectedPost.author}</span>
               </div>
@@ -1056,16 +998,16 @@ const Contact = () => {
             <div className="flex items-center gap-8">
               <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white shadow-lg"><Mail size={32}/></div>
               <div>
-                <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Direct Communication</p>
-                <p className="text-2xl font-black">samson.mbugua@hpalls.com</p>
+                <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 accent-font">Direct Communication</p>
+                <p className="text-2xl font-black heading-font">samson.mbugua@hpalls.com</p>
               </div>
             </div>
             <div className="flex items-center gap-8">
               <a href="https://www.linkedin.com/in/samson-m-a1332a174/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-8 group">
                 <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:bg-blue-600 transition-colors"><Linkedin size={32}/></div>
                 <div>
-                  <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Network Professional</p>
-                  <p className="text-2xl font-black group-hover:text-blue-600 transition-colors">LinkedIn Profile</p>
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 accent-font">Network Professional</p>
+                  <p className="text-2xl font-black group-hover:text-blue-600 transition-colors heading-font">LinkedIn Profile</p>
                 </div>
               </a>
             </div>
@@ -1073,8 +1015,8 @@ const Contact = () => {
               <a href="https://calendly.com/samson-mbugua/project-management" target="_blank" rel="noopener noreferrer" className="flex items-center gap-8 group">
                 <div className="w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white shadow-lg group-hover:bg-blue-600 transition-colors"><Calendar size={32}/></div>
                 <div>
-                  <p className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">Schedule Strategy</p>
-                  <p className="text-2xl font-black group-hover:text-blue-600 transition-colors">Book a Meeting</p>
+                  <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-1 accent-font">Schedule Strategy</p>
+                  <p className="text-2xl font-black group-hover:text-blue-600 transition-colors heading-font">Book a Meeting</p>
                 </div>
               </a>
             </div>
@@ -1092,23 +1034,23 @@ const Contact = () => {
                 className="space-y-8"
               >
                 <div className="grid md:grid-cols-2 gap-8">
-                  <input name="name" required type="text" placeholder="Full Name" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-bold focus:border-black transition-all" />
-                  <input name="email" required type="email" placeholder="Professional Email" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-bold focus:border-black transition-all" />
+                  <input name="name" required type="text" placeholder="Full Name" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-bold focus:border-blue-600 transition-all accent-font" />
+                  <input name="email" required type="email" placeholder="Professional Email" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-bold focus:border-blue-600 transition-all accent-font" />
                 </div>
-                <textarea name="message" required rows={5} placeholder="Project or Advisory Details" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-medium focus:border-black transition-all"></textarea>
+                <textarea name="message" required rows={5} placeholder="Project or Advisory Details" className="w-full bg-white border border-gray-200 rounded-2xl px-6 py-5 outline-none font-medium focus:border-blue-600 transition-all accent-font"></textarea>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <button 
                     disabled={loading}
                     type="submit" 
-                    className="w-full py-6 bg-black text-white font-black uppercase rounded-2xl hover:bg-gray-900 transition-all tracking-[0.2em] shadow-xl disabled:bg-gray-400 flex items-center justify-center gap-3"
+                    className="w-full py-6 bg-black text-white font-bold uppercase rounded-2xl hover:bg-gray-900 transition-all tracking-[0.2em] shadow-xl disabled:bg-gray-400 flex items-center justify-center gap-3 accent-font"
                   >
-                    {loading ? <><RefreshCw className="animate-spin" size={18}/> Handshaking...</> : "Send Message"}
+                    {loading ? <><RefreshCw className="animate-spin" size={18}/> Validating...</> : "Send Message"}
                   </button>
                   <a 
                     href="https://calendly.com/samson-mbugua/project-management" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="w-full py-6 bg-blue-600 text-white font-black uppercase rounded-2xl hover:bg-blue-700 transition-all tracking-[0.2em] shadow-xl flex items-center justify-center gap-3 text-center"
+                    className="w-full py-6 bg-blue-600 text-white font-bold uppercase rounded-2xl hover:bg-blue-700 transition-all tracking-[0.2em] shadow-xl flex items-center justify-center gap-3 text-center accent-font"
                   >
                     Direct Booking
                   </a>
@@ -1124,28 +1066,28 @@ const Contact = () => {
                 <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-xl">
                   <FileCheck size={40} />
                 </div>
-                <h3 className="text-3xl font-black uppercase mb-4">Transmission Success</h3>
-                <p className="text-gray-600 font-medium mb-8">Your request has been prioritized and logged in our secure persistence layer.</p>
+                <h3 className="text-3xl font-black uppercase mb-4 heading-font">Transmission Success</h3>
+                <p className="text-gray-600 font-medium mb-8 italic">Your request has been prioritized and logged in our secure persistence layer.</p>
                 {analysis && (
                   <div className="bg-white p-6 rounded-3xl border border-gray-200 text-left mb-8 shadow-sm">
-                    <h4 className="text-[10px] font-black text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <h4 className="text-[10px] font-bold text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-2 accent-font">
                       <Activity size={12} /> AI Lead Assessment
                     </h4>
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div className="bg-gray-50 p-3 rounded-xl">
-                        <p className="text-[8px] text-gray-500 uppercase font-black mb-1">Category</p>
-                        <p className="text-sm font-bold">{analysis.category}</p>
+                        <p className="text-[8px] text-gray-500 uppercase font-black mb-1 accent-font">Category</p>
+                        <p className="text-sm font-bold heading-font uppercase">{analysis.category}</p>
                       </div>
                       <div className="bg-gray-50 p-3 rounded-xl">
-                        <p className="text-[8px] text-gray-500 uppercase font-black mb-1">Urgency</p>
-                        <p className={`text-sm font-bold ${analysis.urgency === 'High' ? 'text-red-500' : 'text-green-600'}`}>
+                        <p className="text-[8px] text-gray-500 uppercase font-black mb-1 accent-font">Urgency</p>
+                        <p className={`text-sm font-bold heading-font uppercase ${analysis.urgency === 'High' ? 'text-red-500' : 'text-green-600'}`}>
                           {analysis.urgency}
                         </p>
                       </div>
                     </div>
                   </div>
                 )}
-                <button onClick={() => setSubmitted(false)} className="text-sm font-black text-gray-400 uppercase tracking-widest hover:text-black transition-colors">Submit Another Lead</button>
+                <button onClick={() => setSubmitted(false)} className="text-sm font-bold text-gray-400 uppercase tracking-widest hover:text-black transition-colors accent-font">Submit Another Lead</button>
               </motion.div>
             )}
           </AnimatePresence>
@@ -1159,12 +1101,12 @@ const Footer = () => (
   <footer className="bg-black">
     <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col md:flex-row justify-between items-center gap-10">
       <div className="text-center md:text-left">
-        <h3 className="text-2xl font-black uppercase tracking-tighter">SAMSON <span className="text-blue-500">MBUGUA</span></h3>
-        <p className="text-gray-600 text-[10px] font-black uppercase tracking-widest mt-2">© {new Date().getFullYear()} — Strategic Systems Advisor</p>
+        <h3 className="text-2xl font-black uppercase tracking-tighter heading-font">SAMSON <span className="text-blue-500">MBUGUA</span></h3>
+        <p className="text-gray-600 text-[10px] font-bold uppercase tracking-widest mt-2 accent-font">© {new Date().getFullYear()} — Cyber Defense & Strategic Advisory</p>
       </div>
       <div className="flex gap-8">
-        <a href="https://www.linkedin.com/in/samson-m-a1332a174/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors">LinkedIn</a>
-        <a href="https://github.com/mbuguacsam" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/samson-m-a1332a174/" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors accent-font">LinkedIn</a>
+        <a href="https://github.com/mbuguacsam" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white font-bold text-sm uppercase tracking-widest transition-colors accent-font">GitHub</a>
       </div>
     </div>
     <SystemTerminal />
@@ -1194,7 +1136,7 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white font-inter selection:bg-blue-500 selection:text-white bg-[#0a0a0a]">
+    <div className="min-h-screen text-white selection:bg-blue-600 selection:text-white bg-[#0a0a0a]">
       <Navbar onNavAction={handleNavAction} />
       <main>
         <AnimatePresence mode="wait">
