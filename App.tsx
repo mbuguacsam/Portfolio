@@ -510,7 +510,7 @@ const Hero = ({ onNavAction }: { onNavAction: (href?: string) => void }) => (
       >
         <div className="aspect-[3/4] bg-gradient-to-br from-gray-800 to-black rounded-[4rem] overflow-hidden border border-white/10 shadow-2xl p-1">
           <img 
-            src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&q=80&w=1000" 
+            src="https://photos.app.goo.gl/zdSX5Z9BEHqMu1E47" 
             alt="Samson Mbugua - Strategic Advisor" 
             className="w-full h-full object-cover rounded-[3.8rem] contrast-105 saturate-110"
           />
