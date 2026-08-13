@@ -1,0 +1,12 @@
+/* Custom CSS Utility Classes */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #2563eb;
+  border-radius: 3px;
+}
