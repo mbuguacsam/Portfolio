@@ -7,7 +7,7 @@ export const LINKEDIN_PROFILE: LinkedInProfileInfo = {
   linkedinUrl: "https://www.linkedin.com/in/samson-chege-mbugua/",
   location: "Nairobi, Kenya & Remote Global",
   connections: "500+ connections",
-  about: "I am an AI Automation & Business Systems Consultant, Founder & CEO of AutoFinancePro, and Strategic Systems Advisor. I specialize in designing n8n workflows, Zapier integrations, Replit apps, Notion systems, and conducting AI Readiness Audits for Kenyan businesses and global enterprises. Combining deep cybersecurity knowledge with full-stack automation engineering, I help founders and executives eliminate manual overhead and build resilient, automated platforms.",
+  about: "I help founders, COOs, and operations leaders identify the first workflow worth improving. I map slow follow-up, scattered information, repetitive approvals, and disconnected tools, then turn one operational bottleneck into a practical, pilot-ready plan using n8n, Zapier, Replit, Notion, and other fit-for-purpose systems.",
   currentRoles: [
     {
       title: "Founder & CEO",
@@ -22,11 +22,11 @@ export const LINKEDIN_PROFILE: LinkedInProfileInfo = {
   ],
   topSkills: [
     "AI Automation (n8n, Zapier, Replit, Notion)",
-    "AI Readiness Audits for Kenyan Businesses",
-    "Founder & CEO, AutoFinancePro Leadership",
-    "Cyber Defense & Zero-Trust Architecture",
-    "Fractional CTO & Strategic Systems Advisory",
-    "Fintech & Microfinance Platform Engineering"
+    "Workflow Opportunity Reviews",
+    "Follow-Up & CRM Automation",
+    "AI Automation (n8n, Zapier, Replit, Notion)",
+    "Business Systems & Operations Design",
+    "Human-Controlled Security & Governance"
   ]
 };
 
@@ -79,11 +79,11 @@ export const EXPERIENCES: ExperienceItem[] = [
     company: 'AutoFinancePro',
     period: '2022 — Present',
     location: 'Nairobi, Kenya',
-    type: 'Founder / CEO',
+    type: 'Founder / Executive',
     currentRole: true,
     description: [
-      'Founding executive leading product vision, zero-trust security architecture, and automated credit scoring for a multi-tenant auto finance platform.',
-      'Built automated credit evaluation engines and secure bank API proxies connecting automotive lenders with underwriters.',
+      'Founding executive leading product vision, zero-trust security architecture, and workflow automation for a multi-tenant auto finance platform.',
+      'Built secure intake workflows and bank API proxies connecting automotive lenders with underwriters while keeping final decisions human-controlled.',
       'Designed end-to-end audit telemetry to satisfy stringent financial regulatory standards and data protection laws.'
     ],
     keyAchievements: [
@@ -495,26 +495,26 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     id: 'faq-1',
     category: 'Engagement Models',
-    question: 'What is a Fractional CTO engagement, and how does it work for my company?',
-    answer: 'A Fractional CTO provides senior technical leadership, architectural governance, and security oversight on a flexible retainer (typically 10-20 hours/week) without the overhead of a $250k+ full-time executive salary. I partner directly with founders, CEOs, and engineering directors to solve complex technical bottlenecks, direct cloud migrations, establish zero-trust security compliance, and lead product roadmaps.'
+    question: 'What happens during the 30-minute workflow review?',
+    answer: 'We choose one process that is slow, repetitive, or difficult to follow. I help map the trigger, information, actions, exceptions, and human approval points, then we identify whether the right next step is process improvement, a focused automation pilot, or deeper systems work.'
   },
   {
     id: 'faq-2',
     category: 'Pricing & Retainers',
-    question: 'How are advisory engagements priced, and what retainer structures are available?',
-    answer: 'Engagements are structured into three transparent tiers: (1) Strategic Architecture & Cyber Security Audits (Fixed-fee project scope, typically 2-3 weeks turnaround); (2) Monthly Fractional CTO Retainer (Tiered weekly time allocation covering engineering management, roadmap governance, and zero-trust policy audits); and (3) Custom Bespoke System Engineering (Turnkey software development with milestone-based billing). Pricing is customized following an initial 30-minute discovery consultation.'
+    question: 'What do I receive after the workflow review?',
+    answer: 'You receive a concise map of the workflow, the main friction points, a recommendation for what to improve or automate first, and a practical next-step brief. The goal is clarity before implementation—not a generic tool list or an unsupported promise of results.'
   },
   {
     id: 'faq-3',
     category: 'Scope & Deliverables',
-    question: 'What concrete deliverables can I expect during a consulting engagement?',
-    answer: 'Deliverables are concrete and operational, including: Comprehensive Zero-Trust Threat Audits & Remediation Roadmaps, Full-Stack Architecture Blueprints (microservices, database schemas, RBAC policies), API Gateways & Bank-Grade Security Proxies, Production Software Systems (as demonstrated across my 16+ live deliverables in fintech, logistics, and healthcare), and ISO 27001 / Data Protection Compliance documentation.'
+    question: 'Which business workflows are good candidates?',
+    answer: 'Common starting points include lead follow-up, CRM updates, customer onboarding, internal approvals, operational reporting, document handoffs, and inbox-to-action workflows. Sensitive decisions remain human-controlled; automation is used to improve visibility, consistency, and speed around the decision.'
   },
   {
     id: 'faq-4',
     category: 'Process & Timeline',
-    question: 'What is the step-by-step process from initial contact to engagement kickoff?',
-    answer: 'The consultation process follows 4 swift steps: (1) Discovery Call (30 min to diagnose core business bottlenecks and security risks); (2) Architectural Assessment & Proposal (Clear roadmap, deliverables, timeline, and fee structure delivered within 48 hours); (3) Kickoff & Systems Integration (Access provisioning, sprint planning, and zero-trust perimeter setup); and (4) Ongoing Governance & Sprint Execution (Weekly executive syncs, code audits, and milestone deployment).'
+    question: 'What happens after I submit the form?',
+    answer: 'Your details are captured locally in the browser and prepared as an email draft to mbuguacsam@gmail.com. You can review the message before sending, or contact me directly if your mail app does not open. No implementation begins until the workflow, scope, and next step are clear.'
   },
   {
     id: 'faq-5',

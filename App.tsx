@@ -57,8 +57,8 @@ const fadeInUp = {
 const updateMetaTags = (titleSuffix?: string, description?: string) => {
   if (typeof document === 'undefined') return;
 
-  const defaultTitle = "Samson Chege Mbugua | Systems Architect & Strategic Systems Consultant";
-  const defaultDesc = "Official executive consulting portal of Samson Chege Mbugua — Founder at Hpalls Digital, Cyber Defense Specialist, and Fractional CTO.";
+  const defaultTitle = "Samson Mbugua | AI Workflow Automation & Business Systems Consultant";
+  const defaultDesc = "Samson Mbugua helps founders and operations leaders identify practical AI workflow opportunities, improve follow-up, and build resilient business systems.";
 
   const title = titleSuffix ? `${titleSuffix} | Samson Chege Mbugua` : defaultTitle;
   const desc = description || defaultDesc;
@@ -204,7 +204,7 @@ const Navbar = ({ onNavAction }: { onNavAction: (href: string) => void }) => {
             onClick={(e) => handleLinkClick(e, 'contact')}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-1.5 shadow-md shadow-blue-600/20"
           >
-            <PhoneCall size={14} /> Book Advisory Call
+            <PhoneCall size={14} /> Book Workflow Review
           </a>
         </div>
 
@@ -237,7 +237,7 @@ const Navbar = ({ onNavAction }: { onNavAction: (href: string) => void }) => {
               onClick={(e) => handleLinkClick(e, 'contact')}
               className="w-full py-3 bg-blue-600 text-white rounded-lg text-xs font-bold uppercase tracking-wider text-center flex items-center justify-center gap-2 mt-2"
             >
-              <PhoneCall size={16} /> Book Advisory Session
+              <PhoneCall size={16} /> Book Workflow Review
             </a>
           </motion.div>
         )}
@@ -263,7 +263,7 @@ export default function App() {
     name: '',
     email: '',
     company: '',
-    inquiryType: 'Fractional CTO / Architecture Audit',
+    inquiryType: 'AI Workflow Opportunity Review',
     message: ''
   });
 
@@ -322,8 +322,18 @@ export default function App() {
         formData.email,
         `[Company: ${formData.company || 'N/A'}] [Type: ${formData.inquiryType}] ${formData.message}`
       );
+      const subject = encodeURIComponent(`Workflow review request from ${formData.company || formData.name}`);
+      const body = encodeURIComponent([
+        `Name: ${formData.name}`,
+        `Work email: ${formData.email}`,
+        `Company: ${formData.company || 'Not provided'}`,
+        `Request type: ${formData.inquiryType}`,
+        '',
+        formData.message
+      ].join('\n'));
+      window.location.href = `mailto:mbuguacsam@gmail.com?subject=${subject}&body=${body}`;
       setFormSubmitted(true);
-      setFormData({ name: '', email: '', company: '', inquiryType: 'Fractional CTO / Architecture Audit', message: '' });
+      setFormData({ name: '', email: '', company: '', inquiryType: 'AI Workflow Opportunity Review', message: '' });
     } catch (err) {
       console.error(err);
     } finally {
@@ -344,15 +354,15 @@ export default function App() {
             <motion.div {...fadeInUp} className="max-w-4xl">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-950/80 border border-blue-500/30 text-blue-400 text-xs font-semibold mb-6">
                 <Shield size={14} className="text-blue-400" />
-                <span>AI Automation & Business Systems Consultant | Founder & CEO, AutoFinancePro</span>
+                <span>AI workflow automation for founders and operations leaders</span>
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-6">
-                Automating Complex Operations Through <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-indigo-400">AI Workflows & Resilient Systems</span>
+                Turn slow, manual business work into <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-blue-200 to-indigo-400">clear, automation-ready workflows.</span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 max-w-3xl">
-                I am <strong className="text-white">Samson (Chege) Mbugua</strong> <span className="text-xs px-2 py-0.5 rounded bg-white/10 text-gray-300 font-mono">He/Him</span> — AI Automation & Business Systems Consultant, Founder & CEO at <strong className="text-blue-400">AutoFinancePro</strong>, and Founder at <strong className="text-blue-400">Hpalls Digital</strong>. I conduct AI Readiness Audits for Kenyan & global businesses, orchestrating n8n, Zapier, Replit, and Notion automation systems alongside zero-trust cyber defense.
+                I’m <strong className="text-white">Samson (Chege) Mbugua</strong> — an AI Automation & Business Systems Consultant helping founders, COOs, and operations teams find the first workflow worth improving. We look at slow follow-up, scattered information, repetitive approvals, and disconnected tools, then turn one opportunity into a practical pilot plan.
               </p>
 
               {/* Roles Badges */}
@@ -362,9 +372,9 @@ export default function App() {
                     <Briefcase size={20} />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Executive Role</div>
-                    <div className="text-sm font-bold text-white">Founder & CEO</div>
-                    <div className="text-xs text-blue-400">AutoFinancePro</div>
+                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Built for</div>
+                    <div className="text-sm font-bold text-white">Founders & Operators</div>
+                    <div className="text-xs text-blue-400">Decision-makers with a bottleneck</div>
                   </div>
                 </div>
 
@@ -373,9 +383,9 @@ export default function App() {
                     <Sparkles size={20} />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Consulting Focus</div>
-                    <div className="text-sm font-bold text-white">AI Automation Specialist</div>
-                    <div className="text-xs text-emerald-400">n8n, Zapier, Replit, Notion</div>
+                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">First conversation</div>
+                    <div className="text-sm font-bold text-white">30-minute workflow review</div>
+                    <div className="text-xs text-emerald-400">Trigger → action → approval</div>
                   </div>
                 </div>
 
@@ -384,9 +394,9 @@ export default function App() {
                     <Shield size={20} />
                   </div>
                   <div>
-                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Kenyan Enterprise Impact</div>
-                    <div className="text-sm font-bold text-white">AI Readiness Audits</div>
-                    <div className="text-xs text-indigo-400">Hpalls Digital Advisory</div>
+                    <div className="text-xs text-gray-400 uppercase font-bold tracking-wider">Good starting point</div>
+                    <div className="text-sm font-bold text-white">One workflow, not a tool dump</div>
+                    <div className="text-xs text-indigo-400">A pilot-ready next step</div>
                   </div>
                 </div>
               </div>
@@ -398,15 +408,15 @@ export default function App() {
                   onClick={() => handleNavAction('contact')}
                   className="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-blue-600/25"
                 >
-                  Book Advisory Session <ArrowRight size={16} />
+                  Book Workflow Review <ArrowRight size={16} />
                 </a>
 
                 <a 
-                  href="#projects" 
-                  onClick={() => handleNavAction('projects')}
+                  href="#process"
+                  onClick={() => handleNavAction('process')}
                   className="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-gray-200 border border-white/15 rounded-xl text-sm font-bold uppercase tracking-wider transition-all flex items-center gap-2"
                 >
-                  Explore Deliverables (16) <ChevronDown size={16} />
+                  See How It Works <ChevronDown size={16} />
                 </a>
 
                 <a 
@@ -419,6 +429,41 @@ export default function App() {
                 </a>
               </div>
             </motion.div>
+          </div>
+        </section>
+
+        {/* --- DECISION-MAKER PROCESS SECTION --- */}
+        <section id="process" className="py-16 bg-[#0f0f11] border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
+              <div className="max-w-3xl">
+                <span className="text-xs font-bold text-emerald-400 uppercase tracking-widest px-3 py-1 rounded-full bg-emerald-950/50 border border-emerald-800/40">Start with one workflow</span>
+                <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mt-3 mb-4">From operational friction to a pilot-ready plan.</h2>
+                <p className="text-gray-400 text-sm sm:text-base leading-relaxed">You do not need to know which AI tool to buy. Bring one process that is slow, repetitive, or difficult to follow, and we will map where better systems can help while keeping human decisions in control.</p>
+              </div>
+              <a href="#contact" onClick={() => handleNavAction('contact')} className="w-fit px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center gap-2 shadow-lg shadow-emerald-600/20">Describe the bottleneck <ArrowRight size={14} /></a>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { number: '01', title: 'Find the friction', text: 'We identify where follow-up, approvals, reporting, or handoffs are costing time and attention.' },
+                { number: '02', title: 'Map the workflow', text: 'We clarify the trigger, information, action, exception, and human approval points.' },
+                { number: '03', title: 'Choose the next step', text: 'You leave with a practical recommendation: improve the process, automate a slice, or plan a deeper systems engagement.' }
+              ].map((step) => (
+                <div key={step.number} className="p-6 rounded-2xl bg-white/[0.03] border border-white/10 hover:border-emerald-500/40 transition-all">
+                  <div className="text-xs font-mono font-bold text-emerald-400 mb-5">{step.number}</div>
+                  <h3 className="text-lg font-bold text-white mb-2">{step.title}</h3>
+                  <p className="text-sm text-gray-400 leading-relaxed">{step.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-6 p-5 rounded-2xl bg-blue-950/20 border border-blue-500/20 flex flex-col md:flex-row md:items-center gap-4">
+              <span className="text-xs font-bold text-blue-300 uppercase tracking-wider shrink-0">Common starting points</span>
+              <div className="flex flex-wrap gap-2">
+                {['Slow lead follow-up', 'Manual approvals', 'Scattered customer data', 'Disconnected tools', 'Operational reporting'].map((item) => (
+                  <span key={item} className="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-gray-300">{item}</span>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
@@ -500,7 +545,7 @@ export default function App() {
               <div className="mt-4 pt-3 pb-1 flex flex-wrap items-center justify-between text-[11px] text-gray-400 border-t border-white/5 gap-2">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                  <span className="text-gray-300 font-medium">LinkedIn Data Sync Status: <span className="text-emerald-400 font-bold">100% In Sync</span></span>
+                  <span className="text-gray-300 font-medium">LinkedIn reference: <span className="text-emerald-400 font-bold">Official profile linked</span></span>
                   <span className="text-gray-500">•</span>
                   <span className="font-mono text-gray-400">{lastSyncedTime}</span>
                 </div>
@@ -525,7 +570,7 @@ export default function App() {
                 </div>
                 <div>
                   <div className="font-bold text-white mb-1 uppercase tracking-wider">Business Impact</div>
-                  <p className="text-gray-400 leading-relaxed">Delivering enterprise security compliance, eliminating manual process friction, and driving measurable client revenue growth.</p>
+                  <p className="text-gray-400 leading-relaxed">Making manual work easier to see, govern, and improve without removing human judgment from sensitive decisions.</p>
                 </div>
               </div>
             </div>
@@ -570,9 +615,9 @@ export default function App() {
                   <div className="w-12 h-12 rounded-xl bg-emerald-600/20 text-emerald-400 flex items-center justify-center mb-6 group-hover:bg-emerald-600 group-hover:text-white transition-all">
                     <Cpu size={24} />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">Fintech, Credit & Banking Platforms</h3>
+                  <h3 className="text-lg font-bold text-white mb-2">Finance & Business Systems</h3>
                   <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                    Architecting secure micro-lending software, risk verification lookup portals (e.g. Hakikisha Scam Lookup), and automated credit evaluation pipelines with immutable ledgers.
+                    Designing secure finance and operations systems, risk-verification tools, and audit-ready workflows that keep sensitive decisions human-controlled.
                   </p>
                 </div>
                 <div className="text-xs font-semibold text-emerald-400 flex items-center gap-1 group-hover:gap-2 transition-all">
@@ -602,13 +647,13 @@ export default function App() {
                   <div className="w-12 h-12 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center mb-6 group-hover:bg-amber-600 group-hover:text-white transition-all">
                     <TrendingUp size={24} />
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">Technical SEO & Inbound Growth</h3>
+                  <h3 className="text-lg font-bold text-white mb-2">Workflow Automation & Follow-Up</h3>
                   <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                    Connecting HubSpot CRM lead pipelines with high-speed Web Vitals-optimized web platforms, converting organic search traffic into qualified enterprise consulting leads.
+                    Connecting lead capture, CRM updates, inbox actions, and approvals so teams can follow up consistently without turning the business into a black box.
                   </p>
                 </div>
                 <div className="text-xs font-semibold text-amber-400 flex items-center gap-1 group-hover:gap-2 transition-all">
-                  Growth & Revenue <ChevronRight size={14} />
+                  Operations & Conversion <ChevronRight size={14} />
                 </div>
               </div>
             </div>
@@ -705,7 +750,7 @@ export default function App() {
                   <h3 className="text-base font-bold text-white">Bespoke Systems Build</h3>
                   <div className="text-xs text-indigo-400 font-medium mb-3">Milestone-Based Billing</div>
                   <p className="text-xs text-gray-400 leading-relaxed mb-4">
-                    End-to-end software development for fintech credit engines, logistics hubs, and privacy portals with production guarantees.
+                    End-to-end software development for finance, logistics, and privacy-sensitive operations with documented milestones and handover.
                   </p>
                 </div>
                 <div className="pt-4 border-t border-white/5 flex items-center justify-between text-xs">
@@ -1178,7 +1223,7 @@ export default function App() {
                   Initiate a Strategy or Systems Consulting Call
                 </h2>
                 <p className="text-gray-300 text-sm leading-relaxed mb-8">
-                  Whether you require an architectural audit, fractional CTO guidance, zero-trust security hardening, or a custom fintech build, I am available for direct executive advisory engagements.
+                  If your team is losing time to slow follow-up, scattered information, repetitive approvals, or disconnected tools, start with a focused 30-minute workflow review. We will identify one practical opportunity and the right next step.
                 </p>
 
                 <div className="space-y-4 mb-8">
@@ -1213,8 +1258,8 @@ export default function App() {
                       <Clock size={20} />
                     </div>
                     <div>
-                      <div className="text-xs text-gray-400 uppercase font-bold">Consulting Turnaround</div>
-                      <div className="text-sm font-bold text-white">Same-Day Executive Response</div>
+                      <div className="text-xs text-gray-400 uppercase font-bold">What you receive</div>
+                      <div className="text-sm font-bold text-white">A prioritized workflow next step</div>
                     </div>
                   </div>
                 </div>
@@ -1222,14 +1267,14 @@ export default function App() {
 
               {/* Form */}
               <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/10 shadow-2xl">
-                <h3 className="text-xl font-bold text-white mb-6">Send Consulting Request</h3>
+                <h3 className="text-xl font-bold text-white mb-6">Book a 30-minute workflow review</h3>
 
                 {formSubmitted ? (
                   <div className="p-6 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-center">
                     <CheckCircle2 size={40} className="text-emerald-400 mx-auto mb-3" />
                     <h4 className="text-lg font-bold text-white mb-2">Request Received Successfully</h4>
                     <p className="text-xs text-gray-300 mb-4">
-                      Thank you for reaching out. Samson Chege Mbugua will review your advisory details and respond within 24 hours.
+                      Your brief has been saved locally and an email draft should now be ready. If your mail app did not open, email <a href="mailto:mbuguacsam@gmail.com" className="text-blue-300 underline">mbuguacsam@gmail.com</a> directly.
                     </p>
                     <button 
                       onClick={() => setFormSubmitted(false)}
@@ -1282,10 +1327,10 @@ export default function App() {
                         onChange={(e) => setFormData({...formData, inquiryType: e.target.value})}
                         className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white text-sm focus:outline-none focus:border-blue-500"
                       >
-                        <option value="Fractional CTO / Architecture Audit">Fractional CTO / Architecture Audit</option>
-                        <option value="Zero-Trust Cyber Security Audit">Zero-Trust Cyber Security Audit</option>
-                        <option value="Fintech & Microfinance Development">Fintech & Microfinance Development</option>
-                        <option value="Technical SEO & Inbound Automation">Technical SEO & Inbound Automation</option>
+                        <option value="AI Workflow Opportunity Review">AI Workflow Opportunity Review</option>
+                        <option value="Finance & Operations Systems">Finance & Operations Systems</option>
+                        <option value="Follow-Up & CRM Automation">Follow-Up & CRM Automation</option>
+                        <option value="Security & Systems Review">Security & Systems Review</option>
                         <option value="General Executive Advisory">General Executive Advisory</option>
                       </select>
                     </div>
@@ -1297,7 +1342,7 @@ export default function App() {
                         rows={4}
                         value={formData.message}
                         onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        placeholder="Briefly describe the business problem, security requirements, or software scope..." 
+                        placeholder="What workflow is slow, repetitive, or difficult to follow? Include the team, tools, and desired outcome if you can."
                         className="w-full px-4 py-3 rounded-xl bg-black/60 border border-white/15 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-blue-500"
                       />
                     </div>
@@ -1307,7 +1352,7 @@ export default function App() {
                       disabled={isSubmitting}
                       className="w-full py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30"
                     >
-                      {isSubmitting ? 'Processing Request...' : 'Submit Consulting Request'}
+                      {isSubmitting ? 'Preparing Email Draft...' : 'Start the Workflow Review'}
                     </button>
                   </form>
                 )}
