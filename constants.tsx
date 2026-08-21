@@ -1,531 +1,396 @@
-import { ExperienceItem, Project, Skill, Certification, BlogPost, LinkedInProfileInfo, Testimonial, FaqItem } from './types';
+import { LinkedInProfile, Project } from './types';
 
-export const LINKEDIN_PROFILE: LinkedInProfileInfo = {
-  name: "Samson (Chege) Mbugua",
-  pronouns: "He/Him",
-  headline: "AI Automation & Business Systems Consultant | n8n, Zapier, Replit, Notion | Founder & CEO, AutoFinancePro | AI Readiness Audits for Kenyan Businesses",
-  linkedinUrl: "https://www.linkedin.com/in/samson-chege-mbugua/",
-  location: "Nairobi, Kenya & Remote Global",
-  connections: "500+ connections",
-  about: "I help founders, COOs, and operations leaders identify the first workflow worth improving. I map slow follow-up, scattered information, repetitive approvals, and disconnected tools, then turn one operational bottleneck into a practical, pilot-ready plan using n8n, Zapier, Replit, Notion, and other fit-for-purpose systems.",
-  currentRoles: [
-    {
-      title: "Founder & CEO",
-      company: "AutoFinancePro",
-      period: "2022 — Present"
-    },
-    {
-      title: "AI Automation & Business Systems Consultant",
-      company: "Hpalls Digital & Strategic Advisory",
-      period: "2021 — Present"
-    }
-  ],
-  topSkills: [
-    "AI Automation (n8n, Zapier, Replit, Notion)",
-    "Workflow Opportunity Reviews",
-    "Follow-Up & CRM Automation",
-    "AI Automation (n8n, Zapier, Replit, Notion)",
-    "Business Systems & Operations Design",
-    "Human-Controlled Security & Governance"
-  ]
+export const LINKEDIN_PROFILE: LinkedInProfile = {
+  url: 'https://www.linkedin.com/in/samson-m-a1332a174',
+  status: 'Public profile link; individual posts are intentionally not fabricated while LinkedIn is behind an auth wall.'
 };
 
-export const SKILLS: Skill[] = [
-  // AI Automation & Business Systems
-  { name: 'n8n & Zapier Workflow Orchestration', category: 'AI Automation & Business Systems', level: 98, description: 'Complex multi-step webhook automation, self-hosted n8n instances, and API connectors.' },
-  { name: 'Replit & Custom AI App Development', category: 'AI Automation & Business Systems', level: 95, description: 'Rapid prototyping, microservices, AI bot deployment, and custom internal tools.' },
-  { name: 'Notion Workspace & Operating Systems', category: 'AI Automation & Business Systems', level: 96, description: 'Automated relational databases, client portals, and company wiki systems.' },
-  { name: 'AI Readiness Audits for Businesses', category: 'AI Automation & Business Systems', level: 97, description: 'Evaluating AI maturity, data readiness, tool selection, and implementation roadmaps for Kenyan & global firms.' },
-
-  // Cybersecurity & IT
-  { name: 'Information Assurance', category: 'Cybersecurity & IT', level: 96, description: 'Enterprise risk frameworks, threat modeling, and data sovereignty compliance.' },
-  { name: 'Zero-Trust Architecture', category: 'Cybersecurity & IT', level: 94, description: 'Micro-segmentation, identity-first perimeter, and continuous authentication.' },
-  { name: 'Risk & Vulnerability Audits', category: 'Cybersecurity & IT', level: 92, description: 'Penetration testing oversight, audit logging, and ISO 27001 mapping.' },
-  
-  // Software & Data
-  { name: 'Enterprise React & TypeScript', category: 'Software & Data', level: 95, description: 'Resilient full-stack applications with high type-safety standards.' },
-  { name: 'PostgreSQL, Supabase & Cloud SQL', category: 'Software & Data', level: 92, description: 'Relational data modeling, RLS security policies, and database tuning.' },
-  { name: 'Fintech & Credit Operations', category: 'Software & Data', level: 94, description: 'Loan origination, payment ledger reconciliation, and risk scoring engines.' },
-
-  // Growth & Marketing
-  { name: 'Technical SEO (Certified)', category: 'Growth & Marketing', level: 94, description: 'Schema markup, core web vitals, crawl efficiency, and organic growth.' },
-  { name: 'HubSpot Inbound Automation', category: 'Growth & Marketing', level: 90, description: 'Lead nurture workflows, CRM integration, and lifecycle scoring.' },
-];
-
-export const EXPERIENCES: ExperienceItem[] = [
-  {
-    id: 'exp-1',
-    title: 'AI Automation & Business Systems Consultant',
-    company: 'Hpalls Digital & Strategic Advisory',
-    period: '2021 — Present',
-    location: 'Nairobi, Kenya / Global Remote',
-    type: 'Founder / Executive',
-    currentRole: true,
-    description: [
-      'Conduct AI Readiness Audits for Kenyan businesses and international firms to identify automation opportunities and streamline business processes.',
-      'Build end-to-end AI automation workflows using n8n, Zapier, Replit, and Notion to reduce manual operational overhead by up to 80%.',
-      'Deliver executive technology advisory, zero-trust cyber defense audits, and bespoke software systems for high-growth ventures.'
-    ],
-    keyAchievements: [
-      'Engineered 30+ custom n8n and Zapier automated pipelines connecting CRMs, payment gateways, and AI models.',
-      'Advised 20+ businesses across East Africa on AI readiness, cloud security, and automated product roadmaps.',
-      'Achieved a 40% reduction in customer onboarding friction through automated CRM pipeline orchestration.'
-    ],
-    skills: ['n8n', 'Zapier', 'Replit', 'Notion', 'AI Readiness Audits', 'Strategic Advisory', 'Cyber Defense']
-  },
-  {
-    id: 'exp-2',
-    title: 'Founder & CEO',
-    company: 'AutoFinancePro',
-    period: '2022 — Present',
-    location: 'Nairobi, Kenya',
-    type: 'Founder / Executive',
-    currentRole: true,
-    description: [
-      'Founding executive leading product vision, zero-trust security architecture, and workflow automation for a multi-tenant auto finance platform.',
-      'Built secure intake workflows and bank API proxies connecting automotive lenders with underwriters while keeping final decisions human-controlled.',
-      'Designed end-to-end audit telemetry to satisfy stringent financial regulatory standards and data protection laws.'
-    ],
-    keyAchievements: [
-      'Reduced loan application underwriting time from 48 hours to under 15 minutes.',
-      'Zero security incidents reported across 50,000+ customer records.',
-      'Pioneered bank-grade data encryption and zero-trust user authentication.'
-    ],
-    skills: ['Executive Leadership', 'Zero-Trust Security', 'Fintech Architecture', 'n8n Automations', 'React & TypeScript']
-  },
-  {
-    id: 'exp-3',
-    title: 'Senior Software & Systems Engineer',
-    company: 'Mobility & Community Fintech Projects',
-    period: '2019 — 2022',
-    location: 'Nairobi, Kenya',
-    type: 'Contract',
-    currentRole: false,
-    description: [
-      'Designed and delivered high-uptime cooperative financial management software (NNUS Sacco Booking) and location-based mobility platforms (Mechanic Mtaani).',
-      'Established real-time vehicle dispatching, secure transaction ledgers, and automated notification systems.',
-      'Mentored engineering teams on secure coding guidelines, type safety, and Git workflow best practices.'
-    ],
-    keyAchievements: [
-      'Onboarded over 200 vetted mechanics serving 5,000+ mobility requests on Mechanic Mtaani.',
-      'Digitized legacy manual bookkeeping for Sacco co-operatives, eliminating financial leakages.'
-    ],
-    skills: ['React Native', 'Node.js', 'PostgreSQL', 'Stripe', 'Google Maps API']
-  }
-];
-
-export const CERTIFICATIONS: Certification[] = [
-  {
-    id: 'cert-1',
-    name: 'SEO Certification',
-    issuer: 'HubSpot Academy & Industry Standards',
-    year: '2023',
-    category: 'Marketing & SEO',
-    credentialUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    badgeIcon: 'Search'
-  },
-  {
-    id: 'cert-2',
-    name: 'HubSpot Inbound Marketing Certified',
-    issuer: 'HubSpot Academy',
-    year: '2023',
-    category: 'Marketing & SEO',
-    credentialUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    badgeIcon: 'TrendingUp'
-  },
-  {
-    id: 'cert-3',
-    name: 'Information Assurance Specialist',
-    issuer: 'Academic & Industry Credentials (3.8 GPA)',
-    year: '2022',
-    category: 'Cybersecurity',
-    credentialUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    badgeIcon: 'Shield'
-  },
-  {
-    id: 'cert-4',
-    name: 'AWS & Cloud Systems Administration',
-    issuer: 'Cloud Standards Authority',
-    year: '2023',
-    category: 'Cloud & Systems',
-    credentialUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    badgeIcon: 'Cpu'
-  }
-];
-
 export const PROJECTS: Project[] = [
-  // --- Recent Deliverables (Past 7 Months) ---
   {
-    id: 'hakikisha-scam-lookup',
-    title: 'Hakikisha Scam & Risk Lookup',
-    tagline: 'Anti-Fraud & Scam Intelligence Verification Engine',
-    category: 'Fintech & Financial Systems',
-    liveUrl: 'https://hakikisha-scam-lookup--NewNNUS.replit.app',
-    dateAdded: '2026',
-    problem: 'Consumers and small businesses face rising mobile money fraud, phishing accounts, and unverified merchant risks across peer-to-peer transactions.',
-    solution: 'Engineered a real-time scam verification lookup portal allowing users to check phone numbers, account handles, and merchant credentials against a community and database intelligence ledger.',
-    techStack: ['React', 'TypeScript', 'Node.js', 'Risk Score Engine', 'Tailwind CSS'],
-    outcome: 'Mitigated financial loss for users by providing instant, actionable risk scores before money transfer execution.',
-    architectureOverview: 'Anonymized threat reporting pipeline with weighted trust scoring and rate-limited API protection.',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'risiti-yangu',
-    title: 'Risiti Yangu Expense & Tax Scanner',
-    tagline: 'Smart Invoice Verification & Expense Management',
-    category: 'Fintech & Financial Systems',
-    liveUrl: 'https://risitiyangu.lovable.app',
-    dateAdded: '2026',
-    problem: 'Small business owners struggle with lost paper receipts, manual VAT categorization, and missing tax deductions during annual filing.',
-    solution: 'Created an intuitive receipt scanning and expense tracking web portal that parses invoice details, calculates tax breakdowns, and generates audit-ready export summaries.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'OCR Parser', 'Export Ledger'],
-    outcome: 'Reduced monthly accounting reconciliation overhead by 65% for participating small business clients.',
-    architectureOverview: 'Client-side receipt extraction paired with encrypted cloud storage for audit trail preservation.',
-    image: 'https://images.unsplash.com/photo-1554224155-169641357599?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'gianet-microfinance',
-    title: 'Gianet Microfinance Credit System',
-    tagline: 'Core Micro-Lending & Borrower Operations Engine',
-    category: 'Fintech & Financial Systems',
-    liveUrl: 'https://gianetmirofinance.base44.app',
-    dateAdded: '2026',
-    problem: 'Traditional microfinance institutions face manual loan origination bottlenecks, high default rates, and cumbersome borrower tracking.',
-    solution: 'Designed an end-to-end micro-lending management software featuring borrower credit scoring, automated repayment schedules, loan officer assignment, and delinquency tracking.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Microfinance Engine', 'Credit Risk Module'],
-    outcome: 'Digitized credit workflows for 1,000+ active borrowers with zero manual ledger reconciliation errors.',
-    architectureOverview: 'Multi-tenant database schema with strict role-based access control (RBAC) for loan officers and auditors.',
-    image: 'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'faragha-pulse',
-    title: 'Faragha Pulse Confidentiality Shield',
-    tagline: 'Data Privacy & Healthcare Telemetry Engine',
-    category: 'Healthcare, Privacy & Retail',
-    liveUrl: 'https://faragha-pulse-live.base44.app',
-    dateAdded: '2026',
-    problem: 'Sensitive patient information and confidential medical records face strict regulatory mandates under data protection laws.',
-    solution: 'Built a privacy-first health telemetry monitor providing real-time data masking, granular user consent tracking, and immutable confidentiality logs.',
-    techStack: ['React', 'TypeScript', 'Encryption Layer', 'Audit Logger', 'Tailwind CSS'],
-    outcome: 'Achieved 100% compliance alignment with local and international healthcare data protection frameworks.',
-    architectureOverview: 'End-to-end encrypted payload transport with field-level access permission rules.',
-    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'county-waste-management',
-    title: 'County Smart Waste Logistics',
-    tagline: 'Public Sector Municipal Sanitation & Dispatch System',
-    category: 'Public Sector & Utilities',
-    liveUrl: 'https://county-waste-management-system.base44.app',
-    dateAdded: '2026',
-    problem: 'Municipal authorities suffer from uncoordinated waste collection routes, illegal dumping blind spots, and delayed citizen service requests.',
-    solution: 'Architected a public sector waste management platform uniting truck route optimization, bin capacity tracking, citizen incident reporting, and revenue collection.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Route Optimizer', 'Geographic Dispatch'],
-    outcome: 'Decreased uncollected waste complaints by 50% across pilot municipal zones.',
-    architectureOverview: 'Geospatial mapping engine with automated route allocation for collection vehicles.',
-    image: 'https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'safi-go-matatu',
-    title: 'SafiGo Urban Transit Hub',
-    tagline: 'Matatu Fleet Dispatch & Digital Ticketing Ecosystem',
-    category: 'Mobility, Logistics & Tourism',
-    liveUrl: 'https://safi-go--MatatuHub.replit.app',
-    dateAdded: '2026',
-    problem: 'Informal public transit in urban centers experiences cash leakages, unpredictable scheduling, and chaotic passenger boarding.',
-    solution: 'Engineered a digital matatu management hub supporting real-time route monitoring, seat reservation, contactless digital ticketing, and SACCO revenue dashboards.',
-    techStack: ['React', 'TypeScript', 'Node.js', 'Fleet Dispatch', 'Tailwind CSS'],
-    outcome: 'Streamlined vehicle turnaround times and digitized daily fare collections across high-density transit corridors.',
-    architectureOverview: 'High-frequency WebSocket event bus tracking live vehicle positions and booking state.',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'gd-pharmaceuticals',
-    title: 'GD Pharmaceuticals B2B Portal',
-    tagline: 'Regulated Drug Wholesale & Supply Chain Traceability',
-    category: 'Healthcare, Privacy & Retail',
-    liveUrl: 'https://gdpharmacuticals.base44.app',
-    dateAdded: '2026',
-    problem: 'Pharmaceutical distributors need strict batch lot traceability, temperature log compliance, and verified pharmacy purchasing workflows.',
-    solution: 'Developed a B2B ordering and compliance portal enabling licensed pharmacies to place verified orders, inspect batch origin, and track delivery status.',
-    techStack: ['React', 'TypeScript', 'Batch Tracker', 'Tailwind CSS', 'Verification Gateway'],
-    outcome: 'Streamlined supply chain operations for over 100 partner pharmacies while enforcing regulatory compliance.',
-    architectureOverview: 'Role-gated ordering engine requiring active pharmacy license validation before checkout.',
-    image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&q=80&w=800'
+    id: 'motor-buddies-connect',
+    number: '01',
+    title: 'Motor Buddies Connect',
+    liveBrand: 'Mechanic Mtaani',
+    label: 'Mobility marketplace',
+    url: 'https://motor-buddies-connect.lovable.app/',
+    category: 'Mobility',
+    summary: 'A Kenya-first marketplace that connects vehicle owners with trusted local mechanics for urgent and scheduled repairs.',
+    problem: 'Vehicle owners often lose time searching for a reliable mechanic, explaining a fault repeatedly, and coordinating a repair without clear visibility into arrival, price, or payment.',
+    solution: 'The product brings discovery, booking, service selection, live progress, communication, and payment into one customer journey while giving mechanics a practical way to present services and manage demand.',
+    stack: ['React', 'TypeScript', 'GPS workflows', 'M-Pesa-ready payments', 'Marketplace UX'],
+    accent: '#f97316',
+    icon: 'wrench',
+    article: {
+      standfirst: 'Motor Buddies Connect is the product concept; the current public application is branded Mechanic Mtaani. Its strongest idea is not simply finding a mechanic—it is turning a stressful roadside event into a predictable service workflow.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'Breakdowns are high-pressure moments. A driver needs a qualified person nearby, a clear description of the service, and confidence that the person who accepts the job will actually arrive. A conventional directory solves only discovery; it does not coordinate the transaction that follows.',
+            'For mechanics, the opposite problem exists. Independent technicians need a reliable source of local demand, a way to make their expertise visible, and a lightweight operating surface that does not force them to behave like a large workshop.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public experience is organised around a simple sequence: search nearby, book instantly or schedule later, track the job, then pay and rate the service. The landing page also exposes service categories such as electrical repairs, engine service, brakes, suspension, oil changes, body work, and emergency assistance.',
+            'That sequence is valuable because each step reduces uncertainty for the next one. Location narrows the supply pool, structured service categories improve the request, tracking reduces anxiety, and post-job ratings create a trust signal for the next customer.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The core design challenge is state management across two sides of a marketplace. A booking must move from request to acceptance to arrival to work completion without losing the customer, mechanic, or payment context. The interface therefore benefits from explicit status transitions and clear exception handling rather than a loose collection of forms.',
+            'A scalable version would separate the customer journey, mechanic availability, dispatch events, payments, and reviews into auditable domains. That keeps the experience simple while preserving room for fleet accounts, repeat maintenance, and service-level reporting.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how a local service marketplace can use workflow design—not just listings—to create trust, speed, and accountability.',
+      publicSurface: 'The public page currently presents Mechanic Mtaani with booking, GPS tracking, mechanic onboarding, service categories, M-Pesa/card payment language, and fleet-oriented support.'
+    }
   },
   {
     id: 'starlight-order-flow',
-    title: 'Starlight Order Flow Engine',
-    tagline: 'High-Throughput E-Commerce Order & Inventory Routing',
-    category: 'Healthcare, Privacy & Retail',
-    liveUrl: 'https://starlight-order-flow.base44.app',
-    dateAdded: '2026',
-    problem: 'Fast-growing e-commerce sellers suffer order fulfillment delays due to disconnected warehouse stock ledgers and manual dispatching.',
-    solution: 'Built an order routing system that synchronizes storefront checkouts directly with warehouse fulfillment queues and logistics carriers.',
-    techStack: ['React', 'TypeScript', 'Order Pipeline', 'Tailwind CSS', 'Inventory Sync'],
-    outcome: 'Processed over 10,000 orders with sub-second status synchronization across multiple distribution nodes.',
-    architectureOverview: 'Event-driven queue architecture ensuring zero order loss during flash sales.',
-    image: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=800'
+    number: '02',
+    title: 'Starlight Order Flow',
+    liveBrand: 'Starlight Order Flow',
+    label: 'Restaurant operations',
+    url: 'https://starlight-order-flow.base44.app',
+    category: 'Commerce',
+    summary: 'An order-management workspace designed to turn social-media interest into confirmed WhatsApp orders for a restaurant operation.',
+    problem: 'Restaurant teams can lose revenue when customer messages, menu updates, branch coordination, and employee handoffs live in disconnected channels.',
+    solution: 'The product creates a shared operational surface for menu management, branches, employees, WhatsApp previews, settings, and order-related administration.',
+    stack: ['React', 'TypeScript', 'WhatsApp order flows', 'Role-based workspaces', 'Operations UI'],
+    accent: '#f59e0b',
+    icon: 'message',
+    article: {
+      standfirst: 'Starlight Order Flow is a practical example of converting a marketing channel into an operating channel. The public application frames the restaurant as a system where messages, menus, branches, and staff need to stay aligned.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'A social post can generate attention in seconds, but a restaurant still needs to answer the customer, confirm the menu item, route the order to the right branch, and make sure a team member can fulfil it. When those handoffs happen in personal inboxes, errors become difficult to see and even harder to audit.',
+            'The problem is therefore less about adding another storefront. It is about giving the team a reliable bridge from conversation to confirmed order.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public route map exposes an Admin area alongside Menu Manager, Branch Manager, Employee Manager, WhatsApp Preview, Settings, Employee Login, and Employee Dashboard. That structure makes the product feel like an operations console rather than a static restaurant website.',
+            'The WhatsApp preview is especially important because it lets the team inspect the customer-facing handoff before it becomes a live conversation. The result is a tighter relationship between brand voice, menu accuracy, and order capture.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The critical design decision is to treat an order as a record with ownership and status. A useful implementation would track the source message, selected items, branch, responsible employee, confirmation state, and fulfilment state as separate but connected data points.',
+            'That model also creates a foundation for analytics: response time, abandoned conversations, branch load, frequently ordered items, and staff throughput become measurable without forcing managers to reconcile chat screenshots manually.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how a focused internal tool can make an existing customer channel more reliable without asking a business to replace the channel its customers already use.',
+      publicSurface: 'The public Base44 page describes an automated lead-capture and order-management platform for Starlight Restaurant and exposes admin, menu, branch, employee, WhatsApp, login, and dashboard areas.'
+    }
   },
   {
-    id: 'kenya-tour-driver',
-    title: 'Kenya Tour Driver Guide Portal',
-    tagline: 'Professional Safari Driver Vetting & Operations Hub',
-    category: 'Mobility, Logistics & Tourism',
-    liveUrl: 'https://kenya-tour-driver-landing-page-mainzip--SamsonchegeM.replit.app',
-    dateAdded: '2026',
-    problem: 'Tour operators and safari travelers lack a verified, centralized portal to evaluate driver credentials, safety records, and booking availability.',
-    solution: 'Created an operational hub connecting certified safari driver guides with tour companies, complete with credential verification and trip requests.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Verification Module', 'Booking Flow'],
-    outcome: 'Elevated tour service reliability and driver trust for eco-tourism operators.',
-    architectureOverview: 'Identity verification flow linking driver certification badges with public search records.',
-    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?auto=format&fit=crop&q=80&w=800'
+    id: 'gd-pharmaceuticals',
+    number: '03',
+    title: 'GD Pharmaceuticals',
+    liveBrand: 'AfyaConnect',
+    label: 'Digital health marketplace',
+    url: 'https://gdpharmacuticals.base44.app/',
+    category: 'Health & media',
+    summary: 'A healthcare operations concept whose current public surface brings pharmacy, prescriptions, consultations, diagnostics, records, and billing into one marketplace.',
+    problem: 'Patients, pharmacies, clinicians, and administrators often work across separate systems, making it difficult to move from consultation to prescription, fulfilment, records, and payment with continuity.',
+    solution: 'The current live product presents a broad digital-health workspace with role selection, consultations, prescriptions, inventory, marketplace, medical records, billing, compliance, pharmacy profiles, and facility directories.',
+    stack: ['React', 'TypeScript', 'Healthcare workflows', 'Inventory concepts', 'Role-based navigation'],
+    accent: '#2dd4bf',
+    icon: 'cross',
+    article: {
+      standfirst: 'The URL supplied as GD Pharmaceuticals currently presents as AfyaConnect. That mismatch is useful context: the live surface has evolved into a wider digital-health marketplace, so this article describes what is visible today instead of repeating an older wholesale-pharmacy narrative.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'Healthcare journeys rarely stop at a single transaction. A consultation can lead to a prescription, a pharmacy order, a lab result, a follow-up, an insurance claim, or a record update. When each step sits in a separate workflow, the patient experiences friction and the organisation loses context.',
+            'A pharmacy-focused system also has to treat access, auditability, and identity as first-class concerns. The product cannot optimise convenience by making sensitive information visible to the wrong role.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public page exposes a wide set of healthcare journeys: teleconsultations, prescriptions, prescription history, inventory, audit logs, referrals, marketplace, lab results, health records, orders, notifications, billing, analytics, compliance, insurance billing, pharmacy profiles, medical records, and facility directories.',
+            'That breadth suggests a platform strategy rather than a single-purpose catalogue. The value is in linking the entities—patient, provider, pharmacy, prescription, order, record, and payment—while retaining clear boundaries between them.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'A robust architecture would use role-aware access, immutable audit events, explicit consent, and carefully scoped data views. A pharmacy employee should see what is needed to fulfil a prescription, while a patient should see a coherent history without receiving internal operational controls.',
+            'The next product decision is not simply which feature to add. It is which care pathway to make dependable first—consultation to prescription, pharmacy fulfilment, or records and billing—then how to measure safety and completion at each transition.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates the value of mapping a healthcare ecosystem around real handoffs rather than treating each feature as an isolated screen.',
+      publicSurface: 'The live URL currently presents AfyaConnect and exposes digital-health routes including consultations, prescriptions, inventory, marketplace, records, billing, analytics, compliance, and pharmacy operations.'
+    }
+  },
+  {
+    id: 'gianet-microfinance',
+    number: '04',
+    title: 'Gianet Microfinance',
+    liveBrand: 'Gianet Micro Finance',
+    label: 'SME lending workflow',
+    url: 'https://gianetmirofinance.base44.app',
+    category: 'Finance',
+    summary: 'A Kenya-focused lending experience for working-capital applications, AI-assisted review, borrower status, and transparent repayment journeys.',
+    problem: 'Small businesses need access to working capital, but paper-heavy applications, unclear status, and slow handoffs can make financing feel inaccessible.',
+    solution: 'The product presents an online application that moves through business details, owner details, loan request, documents, and review, with borrower login, status checking, WhatsApp contact, and human loan-officer involvement.',
+    stack: ['React', 'TypeScript', 'Loan application flow', 'AI-assisted review', 'Borrower portal'],
+    accent: '#a855f7',
+    icon: 'coins',
+    article: {
+      standfirst: 'Gianet Microfinance turns a lending proposition into a visible, staged application journey. The important design move is to combine speed with a human decision point instead of presenting automation as a substitute for responsible underwriting.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'For an SME borrower, the most frustrating part of a loan application is often not the form itself. It is uncertainty: whether the application was received, what is missing, who is reviewing it, and when a decision can be expected.',
+            'For the lender, the risk is the reverse. A fast application experience can create incomplete records, weak documentation, and an underwriting queue that is difficult to prioritise.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The live experience explains a three-step path: apply online, move through an AI-assisted review with a loan officer making the final call, and receive funding with a clear repayment schedule. The form is structured around business identity, owner identity, county, sector, and supporting documents.',
+            'Borrower login and application-status routes close the loop after submission. WhatsApp contact provides a familiar escalation path for applicants who need help, which is particularly important when the product serves a broad small-business audience.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The application should be treated as a case file with controlled transitions, not a single submission blob. Each stage can carry validation, document requirements, reviewer ownership, and an audit event so the borrower and lender see the same underlying state.',
+            'A responsible next layer would include decision explanations, exception queues, repayment reminders, and clear retention rules for identity and financial data. Those controls create trust around the AI-assisted portion of the workflow.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how lending software can make the borrower journey clearer while keeping credit responsibility with accountable people and processes.',
+      publicSurface: 'The live page currently presents Gianet Micro Finance, a working-capital lending application with borrower status, portal access, WhatsApp support, and a staged application form.'
+    }
+  },
+  {
+    id: 'county-waste-management',
+    number: '05',
+    title: 'County Waste Management System',
+    liveBrand: 'EcoTrack Nakuru County',
+    label: 'Civic operations',
+    url: 'https://county-waste-management-system.base44.app/',
+    category: 'Public systems',
+    summary: 'A civic participation and collection-tracking concept that connects households, youth collectors, and county supervisors around measurable pickups.',
+    problem: 'Waste collection systems struggle when residents cannot see how to participate, collectors lack a trusted record of work, and supervisors cannot connect pickups to community outcomes.',
+    solution: 'The live product presents household and collector registration, supervisor access, pickup logging, kilogram tracking, eco-points, profiles, leaderboards, and a Nakuru County pilot narrative.',
+    stack: ['React', 'TypeScript', 'Role-based registration', 'Pickup tracking', 'Community metrics'],
+    accent: '#22c55e',
+    icon: 'leaf',
+    article: {
+      standfirst: 'The County Waste Management System currently presents as EcoTrack Nakuru County, a pilot concept that links waste collection to youth income, household participation, and visible environmental progress.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'Municipal services are experienced locally. A household wants to know when waste will be collected, a collector needs to prove the work completed, and a supervisor needs a view that supports accountability across zones. A dashboard that only serves administrators misses the participation layer that makes the system work.',
+            'The product therefore has to be designed around multiple roles with different motivations, not just a single route-optimisation screen.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public surface gives households a registration path, collectors a way to join the programme, and supervisors a dashboard entry point. It then turns collection into a visible record: every pickup can contribute to kilograms collected, eco-points, badges, and countywide recognition.',
+            'That approach makes service delivery legible. Residents can participate, collectors can build a track record, and supervisors can work with a shared vocabulary instead of disconnected complaints and spreadsheets.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The key data model is simple but powerful: household, bin or pickup identity, collector, zone, pickup event, weight, points, and supervisor review. Those entities can support transparent payouts, exception handling, route planning, and impact reporting without forcing every stakeholder into the same interface.',
+            'A production rollout would also need offline-friendly capture, verification for reported weights, privacy controls for household information, and an escalation path for missed or disputed pickups.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how civic software can combine service delivery, income opportunity, and community feedback in one understandable operating model.',
+      publicSurface: 'The live product currently presents EcoTrack Nakuru County as a 2026 pilot with household registration, collector onboarding, supervisor access, pickup tracking, eco-points, and community metrics.'
+    }
   },
   {
     id: 'pori-safari-path',
-    title: 'Pori Safari Path Ecotourism',
-    tagline: 'Custom Safari Itinerary Builder & Reserve Booking',
-    category: 'Mobility, Logistics & Tourism',
-    liveUrl: 'https://pori-safari-path.base44.app',
-    dateAdded: '2026',
-    problem: 'International travelers face fragmented booking steps when coordinating national park permits, lodges, and wildlife game drives.',
-    solution: 'Designed an ecotourism itinerary platform allowing users and travel agents to seamlessly bundle game reserve entry, luxury tent bookings, and transport.',
-    techStack: ['React', 'TypeScript', 'Itinerary Engine', 'Tailwind CSS', 'Reservation System'],
-    outcome: 'Boosted direct itinerary inquiries and streamlined park clearance paperwork.',
-    architectureOverview: 'Dynamic itinerary pricing calculator with multi-reserve inventory aggregation.',
-    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&q=80&w=800'
+    number: '06',
+    title: 'Pori Safari Path',
+    liveBrand: 'Pori Guide',
+    label: 'Travel companion',
+    url: 'https://pori-safari-path.base44.app/',
+    category: 'Travel',
+    summary: 'A safari companion that helps travellers prepare, plan journeys, learn about wildlife, and keep a personal record of the trip.',
+    problem: 'Safari planning is spread across destination research, packing, route decisions, wildlife education, guide discovery, and memories captured after the trip.',
+    solution: 'The public application exposes weather, New to Kenya guidance, wildlife checklists, community gallery, map view, a safari glossary, local guides, wildlife encyclopedia, trip planner, packing preparation, journeys, saved trips, journals, photo galleries, rewards, and packing analytics.',
+    stack: ['React', 'TypeScript', 'Trip planning', 'Travel knowledge base', 'Personal travel data'],
+    accent: '#eab308',
+    icon: 'compass',
+    article: {
+      standfirst: 'Pori Safari Path currently presents as Pori Guide. Its product direction is broader than a booking page: it is a preparation and memory layer for travellers who want context before, during, and after a safari.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'Travel planning is often fragmented across browser tabs, saved messages, maps, packing notes, and post-trip photo folders. Safari travel adds another layer of complexity because the experience depends on weather, geography, wildlife knowledge, local guidance, and personal readiness.',
+            'A good companion product should reduce that fragmentation without flattening the trip into a checklist.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public route structure covers both practical preparation and discovery: weather, map view, local guides, glossary, wildlife encyclopedia, packing preparation, trip planner, saved journeys, journal, gallery, rewards, and packing analytics.',
+            'This combination creates a useful product loop. A traveller learns, plans, prepares, records, and returns to the experience after the journey instead of treating the app as a one-time booking funnel.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The product benefits from a personal travel graph: destinations, journeys, packing items, wildlife entries, guides, photos, and journal notes should be connected but editable. That gives the interface enough continuity to feel personal while keeping data ownership understandable.',
+            'The next design question is trust. Local guide information, wildlife content, weather, and travel advice should have clear provenance and update paths so the companion remains useful in the field.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how a travel product can create value through preparation and context, not only through reservations.',
+      publicSurface: 'The public page currently exposes Pori Guide routes for weather, wildlife, maps, guides, trip planning, packing, journeys, journals, galleries, rewards, and analytics.'
+    }
   },
   {
-    id: 'asset-fetch-tracking',
-    title: 'AssetFetch Remote Tracking',
-    tagline: 'Field Equipment & Safari Vehicle Asset Locator',
-    category: 'Mobility, Logistics & Tourism',
-    liveUrl: 'https://asset-fetch--Safariguide.replit.app',
-    dateAdded: '2026',
-    problem: 'Remote safari lodges and exploration teams lose visibility of field vehicles and high-value gear in low-bandwidth regions.',
-    solution: 'Engineered a resilient field asset management tool supporting low-data status logging, offline sync, geofencing, and service schedules.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Geofencing Module', 'Offline Sync'],
-    outcome: 'Eliminated unrecorded equipment movements and reduced emergency vehicle maintenance downtime.',
-    architectureOverview: 'Local-first client storage that syncs telemetry payloads as soon as connectivity resumes.',
-    image: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&q=80&w=800'
+    id: 'risiti-yangu',
+    number: '07',
+    title: 'Risiti Yangu',
+    liveBrand: 'RisitiYangu',
+    label: 'Retail operations',
+    url: 'https://risitiyangu.lovable.app/',
+    category: 'Commerce',
+    summary: 'A Kenya-focused mobile POS concept that brings M-Pesa, cash sales, WhatsApp receipts, and KRA/VAT records into one small-shop workflow.',
+    problem: 'Small shops need to sell quickly while keeping a usable record of payments, receipts, VAT, products, and daily performance without adding enterprise-level complexity.',
+    solution: 'The product combines M-Pesa and cash flows, WhatsApp receipts, VAT-ready invoices, KRA PIN and invoice details, tax summaries, product setup, stock alerts, loyalty, reports, supplier alerts, and multi-user plans.',
+    stack: ['React', 'TypeScript', 'Mobile-first POS', 'WhatsApp receipts', 'KRA/eTIMS concepts'],
+    accent: '#0f766e',
+    icon: 'receipt',
+    article: {
+      standfirst: 'Risiti Yangu is designed around the moment a small shop makes a sale. Instead of separating payment, receipt delivery, and tax records, it treats them as one interaction that should be fast for the seller and legible later.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'Retailers often use one tool for stock, another for mobile money, paper for receipts, and memory for daily performance. That creates avoidable reconciliation work and makes it harder to answer basic questions about sales and tax.',
+            'The challenge is not to reproduce every capability of a large enterprise POS. It is to make the essential transaction flow reliable on the device a shop owner already carries.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The live page describes a flow in which the seller records an M-Pesa or cash sale, sends a WhatsApp receipt, and keeps the transaction ready for VAT and KRA-oriented records. It also exposes product setup, daily summaries, tax visibility, stock alerts, loyalty points, supplier alerts, reports, and multi-user plans.',
+            'The strength of the concept is the tight relationship between action and record. A receipt is not just a message to a customer; it is also a structured event in the shop ledger.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'A trustworthy POS needs a clear source of truth for sale, payment status, tax calculation, receipt delivery, and inventory impact. Those events should be traceable even when the network is unreliable or a payment confirmation arrives later.',
+            'The product also needs careful wording around compliance. Tax and eTIMS functionality should be presented as supported workflows and integration readiness unless an official integration has been validated for the specific deployment.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how a small-business tool can create leverage by joining speed at checkout with discipline in the records behind it.',
+      publicSurface: 'The live page currently positions RisitiYangu as a Kenya-focused mobile POS for M-Pesa, cash, WhatsApp receipts, VAT-ready invoices, KRA details, summaries, stock, loyalty, and reports.'
+    }
   },
   {
-    id: 'pawmfort-concierge',
-    title: 'Pawmfort Pet Care Concierge',
-    tagline: 'Luxury Veterinary & Pet Care Operations Portal',
-    category: 'Healthcare, Privacy & Retail',
-    liveUrl: 'https://pawmfort.lovable.app/',
-    dateAdded: '2026',
-    problem: 'Pet owners experience friction when scheduling premium veterinary appointments, grooming sessions, and health record tracking.',
-    solution: 'Built an elegant pet care concierge application featuring automated appointment booking, medical history tracking, and subscription care plans.',
-    techStack: ['React', 'TypeScript', 'Tailwind CSS', 'Scheduling Engine', 'Client Portal'],
-    outcome: 'Expanded client retention rates and eliminated clinic booking conflicts.',
-    architectureOverview: 'Calendar synchronization engine with automated WhatsApp/SMS reminders.',
-    image: 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=800'
-  },
-
-  // --- Foundational Enterprise Case Studies ---
-  {
-    id: 'auto-finance-pro',
-    title: 'Auto Finance Pro',
-    tagline: 'Automotive Credit Evaluation & Insurance Engine',
-    category: 'Fintech & Financial Systems',
-    liveUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    problem: 'Fragmentation in automotive financing and insurance leads to long processing times, manual document friction, and data security vulnerabilities.',
-    solution: 'Designed a unified zero-trust platform combining credit evaluation, instant insurance quotation, and bank-grade encryption with automated underwriting workflows.',
-    techStack: ['React', 'TypeScript', 'Supabase', 'Express API Proxy', 'Tailwind CSS'],
-    outcome: 'Reduced application processing time by 40% while ensuring strict adherence to data protection standards.',
-    architectureOverview: 'Server-side API proxy isolates credit keys. Micro-segmented storage prevents cross-tenant data leakage.',
-    image: 'https://images.unsplash.com/photo-1554224155-169641357599?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'nnus-sacco',
-    title: 'NNUS Sacco Digital Banking',
-    tagline: 'Secure Cooperative Financial Management Platform',
-    category: 'Fintech & Financial Systems',
-    liveUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    problem: 'Legacy paper booking systems in savings and credit co-operatives caused audit discrepancies, delayed member payouts, and revenue loss.',
-    solution: 'Engineered a modern web platform featuring real-time transaction ledgers, automated audit logging, and encrypted user authentication.',
-    techStack: ['TypeScript', 'Supabase', 'PostgreSQL', 'Auth0', 'Tailwind CSS'],
-    outcome: 'Completely eliminated paper ledger reconciliation errors and enhanced member trust across 10,000+ transactions.',
-    architectureOverview: 'Role-based access control (RBAC) with immutable audit logging on every cash allocation event.',
-    image: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=800'
-  },
-  {
-    id: 'mechanic-mtaani',
-    title: 'Mechanic Mtaani Platform',
-    tagline: 'On-Demand Mobility & Vetted Services Network',
-    category: 'Mobility, Logistics & Tourism',
-    liveUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    problem: 'Vehicle owners facing unexpected breakdowns lacked access to verified, reliable mechanics nearby, posing safety and pricing risks.',
-    solution: 'Built a multi-platform marketplace matching stranded drivers with geotagged, background-checked automotive technicians in real-time.',
-    techStack: ['React Native', 'Node.js', 'Stripe', 'Google Maps Platform', 'Tailwind CSS'],
-    outcome: 'Onboarded 200+ certified technicians and processed over 5,000 emergency assistance requests across metropolitan Nairobi.',
-    architectureOverview: 'Real-time WebSocket dispatch engine with secure payment hold until job completion verification.',
-    image: 'https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?auto=format&fit=crop&q=80&w=800'
+    id: 'faragha-pulse',
+    number: '08',
+    title: 'Faragha Pulse',
+    liveBrand: 'FARAGHA Media Group',
+    label: 'Publishing operations',
+    url: 'https://faragha-pulse-live.base44.app/',
+    category: 'Health & media',
+    summary: 'A newsroom-style publishing surface with public news categories, live analysis, breaking-news presentation, and a management dashboard entry point.',
+    problem: 'A media organisation needs to publish quickly while keeping stories discoverable, categorised, and connected to internal editorial operations.',
+    solution: 'The current public product presents a media home, news categories, public portal, management dashboard, live breaking-news ticker, featured analysis, story cards, and organisation-level contact and support pages.',
+    stack: ['React', 'TypeScript', 'Editorial content model', 'Category navigation', 'Management dashboard'],
+    accent: '#ef4444',
+    icon: 'broadcast',
+    article: {
+      standfirst: 'The supplied Faragha Pulse URL currently renders as FARAGHA Media Group, a news and publishing product. That current public surface is the source of truth for this case study, replacing the earlier healthcare-telemetry framing with a more accurate editorial-operations story.',
+      sections: [
+        {
+          heading: 'The operational problem',
+          paragraphs: [
+            'News products have two audiences with different needs. Readers need clarity, recency, navigation, and enough context to decide what to read. Editors need a workflow that supports publishing, categorisation, updates, and operational control without making the public site feel like an internal system.',
+            'The product must also handle the risks of fast-moving content: corrections, timestamps, story status, source notes, and editorial ownership.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public experience is structured as a media home with politics, business, entertainment, sports, and other categories. It includes a live breaking-news ribbon, a featured story with live analysis, latest-story filters, a public portal, and a management dashboard entry point.',
+            'That separation gives readers a simple path into the content while signalling that a deeper management surface exists for the team behind the publication.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The content model should make story state explicit: draft, reviewed, published, updated, corrected, or archived. Categories, authors, timestamps, and analysis links then become structured metadata rather than formatting decisions repeated by hand.',
+            'A production newsroom would also benefit from a clear audit trail for edits and a visible correction pattern. Trust is a product feature, especially when the interface foregrounds live and breaking content.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how an editorial interface can balance reader speed with the structure required for responsible publishing.',
+      publicSurface: 'The live URL currently presents FARAGHA Media Group with public news categories, breaking-news presentation, live analysis, a public portal, and management dashboard navigation.'
+    }
   },
   {
-    id: 'zero-trust-telemetry',
-    title: 'Zero-Trust Telemetry Engine',
-    tagline: 'Enterprise Cyber Threat Sentinel',
-    category: 'Cyber Defense & Security',
-    liveUrl: 'https://www.linkedin.com/in/samson-chege-mbugua/',
-    problem: 'Distributed hybrid work environments suffer from perimeter blind spots and delayed incident detection.',
-    solution: 'Architected a lightweight agentic telemetry monitor that logs system events, detects anomalous payload attempts, and triggers automated policy isolation.',
-    techStack: ['TypeScript', 'Express', 'WebSockets', 'Tailwind CSS', 'Threat Intelligence'],
-    outcome: 'Delivered sub-second threat detection feeds with contextual analysis for rapid SOC incident triage.',
-    architectureOverview: 'Streaming event bus with client-side zero-trust verification and server-side threat scoring.',
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800'
-  }
-];
-
-export const INITIAL_BLOG_POSTS: BlogPost[] = [
-  {
-    id: 'zero-trust-landscape',
-    title: 'The Evolving Landscape of Zero-Trust Security',
-    author: 'Samson Chege Mbugua',
-    date: 'August 2024',
-    readTime: '5 min read',
-    category: 'Cybersecurity',
-    excerpt: 'Exploring operational frameworks in Zero-Trust Architecture (ZTA) implementation for high-growth enterprises and financial systems.',
-    content: `Zero-trust security is a fundamental shift in business strategy. In an era where the traditional network perimeter has dissolved due to remote work, cloud migration, and sophisticated cyber threats, the "never trust, always verify" principle has become critical.
-
-Advancements in Zero-Trust Architecture (ZTA) now leverage identity verification and micro-segmentation to isolate workloads and prevent lateral movement of attackers. However, the challenges remain significant: legacy system compatibility, user experience friction, and managing granular access policies across a distributed ecosystem.
-
-Implementing zero-trust requires a cultural shift as much as a technical one, focusing on least-privileged access and continuous monitoring of every request. As cyber defense advisors, our goal is to build frictionless verification channels that protect mission-critical assets without hindering business velocity.`,
-    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=800',
-    tags: ['Zero-Trust', 'Cybersecurity', 'Enterprise Architecture', 'Identity']
-  },
-  {
-    id: 'fractional-cto-playbook',
-    title: 'Why Growing Ventures Need Fractional Systems Leadership',
-    author: 'Samson Chege Mbugua',
-    date: 'July 2024',
-    readTime: '6 min read',
-    category: 'Strategic Leadership',
-    excerpt: 'How early and growth-stage companies leverage fractional CTO advisory to avoid costly architectural mistakes and accelerate time-to-market.',
-    content: `Building software is cheap today; building the *right* architecture that scales securely without technical debt requires deep experience. Many founders hire full-time engineering teams before defining clear data sovereignty, API security, and infrastructure boundaries.
-
-A Fractional Systems Advisor bridges the gap between executive strategy and technical execution. By conducting risk audits, vetting vendor dependencies, and establishing type-safe CI/CD pipelines early, ventures protect investor capital and build durable enterprise equity.`,
-    image: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=800',
-    tags: ['Fractional CTO', 'Consulting', 'Architecture', 'Startups']
-  },
-  {
-    id: 'quantum-fintech',
-    title: 'Quantum-Resistant Cryptography in Financial Systems',
-    author: 'Samson Chege Mbugua',
-    date: 'June 2024',
-    readTime: '6 min read',
-    category: 'Cybersecurity',
-    excerpt: 'As quantum computing milestones accelerate, modern financial infrastructure must proactively migrate toward post-quantum encryption standards.',
-    content: `Financial technology relies on public-key cryptography (RSA and ECC) to secure trillions of dollars in transactions daily. However, the emergence of quantum algorithms poses a structural threat to these mathematical safeguards.
-
-Post-Quantum Cryptography (PQC) standards offer lattice-based encryption algorithms designed to withstand quantum attack vectors. For fintech architects and technical leaders, beginning crypto-agility assessments today is non-negotiable.
-
-This involves inventorying existing cryptographic keys, identifying vulnerable TLS handshakes, and decoupling encryption primitives from application logic to allow seamless algorithm rotation in production environments.`,
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?auto=format&fit=crop&q=80&w=800',
-    tags: ['Cryptography', 'Fintech', 'Quantum Security', 'Data Privacy']
-  }
-];
-
-export const TESTIMONIALS: Testimonial[] = [
-  {
-    id: 'test-1',
-    clientName: 'Patrick Njoroge',
-    role: 'Managing Director & Co-Founder',
-    organization: 'Auto Finance Pro & Auto Credit Group',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200',
-    quote: 'Samson’s systems advisory completely transformed our underwriting workflow. By implementing a zero-trust API gateway and automated credit evaluation engine, he helped us reduce application processing time from 2 days to under 15 minutes while maintaining strict data compliance.',
-    engagementScope: 'Zero-Trust Architecture & Underwriting Automation',
-    outcomeMetric: '40% Reduction in Application Turnaround Time',
-    rating: 5,
-    verifiedLinkedin: true
-  },
-  {
-    id: 'test-2',
-    clientName: 'Grace Wambui',
-    role: 'Board Secretary & Head of Digital Banking',
-    organization: 'NNUS Cooperative Society',
-    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200',
-    quote: 'When we decided to digitize our cooperative booking and savings ledgers, Samson was the fractional advisor we trusted. His deep understanding of audit trails, financial security, and type-safe systems eliminated manual bookkeeping errors across 10,000+ member transactions.',
-    engagementScope: 'Digital Banking Ledger & Audit System',
-    outcomeMetric: '100% Paperless Ledger Accuracy',
-    rating: 5,
-    verifiedLinkedin: true
-  },
-  {
-    id: 'test-3',
-    clientName: 'Daniel Ochieng',
-    role: 'Chief Operating Officer',
-    organization: 'MatatuHub & SafeGo Mobility',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200',
-    quote: 'Samson designed our SafiGo urban transit dispatch hub in record time. His ability to handle real-time WebSockets, live route tracking, and contactless fare reconciliation under chaotic urban conditions was nothing short of remarkable.',
-    engagementScope: 'Fleet Dispatch & Digital Ticketing Platform',
-    outcomeMetric: '5,000+ Daily Transit Transactions Handled',
-    rating: 5,
-    verifiedLinkedin: true
-  },
-  {
-    id: 'test-4',
-    clientName: 'Dr. Evelyn Cherono',
-    role: 'Chief Medical Officer & Director of Compliance',
-    organization: 'Faragha Health Privacy Network',
-    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200',
-    quote: 'Navigating medical record confidentiality and patient consent laws was a critical hurdle for us. Samson architected our Faragha Pulse confidentiality shield with granular consent masks, allowing us to pass external compliance audits seamlessly.',
-    engagementScope: 'Healthcare Data Privacy & Consent Engine',
-    outcomeMetric: 'Zero Audit Non-Conformances Reported',
-    rating: 5,
-    verifiedLinkedin: true
-  },
-  {
-    id: 'test-5',
-    clientName: 'Francis Mwangi',
-    role: 'Director of Environmental Services',
-    organization: 'County Municipal Waste Logistics',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200',
-    quote: 'Samson delivered a municipal waste route optimization platform that solved our collection blind spots. His pragmatic approach to public sector software meant workers and administrators adopted the system effortlessly.',
-    engagementScope: 'Municipal Route Optimization & Dispatch',
-    outcomeMetric: '50% Drop in Uncollected Service Complaints',
-    rating: 5,
-    verifiedLinkedin: true
-  }
-];
-
-export const FAQ_ITEMS: FaqItem[] = [
-  {
-    id: 'faq-1',
-    category: 'Engagement Models',
-    question: 'What happens during the 30-minute workflow review?',
-    answer: 'We choose one process that is slow, repetitive, or difficult to follow. I help map the trigger, information, actions, exceptions, and human approval points, then we identify whether the right next step is process improvement, a focused automation pilot, or deeper systems work.'
-  },
-  {
-    id: 'faq-2',
-    category: 'Pricing & Retainers',
-    question: 'What do I receive after the workflow review?',
-    answer: 'You receive a concise map of the workflow, the main friction points, a recommendation for what to improve or automate first, and a practical next-step brief. The goal is clarity before implementation—not a generic tool list or an unsupported promise of results.'
-  },
-  {
-    id: 'faq-3',
-    category: 'Scope & Deliverables',
-    question: 'Which business workflows are good candidates?',
-    answer: 'Common starting points include lead follow-up, CRM updates, customer onboarding, internal approvals, operational reporting, document handoffs, and inbox-to-action workflows. Sensitive decisions remain human-controlled; automation is used to improve visibility, consistency, and speed around the decision.'
-  },
-  {
-    id: 'faq-4',
-    category: 'Process & Timeline',
-    question: 'What happens after I submit the form?',
-    answer: 'Your details are captured locally in the browser and prepared as an email draft to mbuguacsam@gmail.com. You can review the message before sending, or contact me directly if your mail app does not open. No implementation begins until the workflow, scope, and next step are clear.'
-  },
-  {
-    id: 'faq-5',
-    category: 'Engagement Models',
-    question: 'Can you work with our existing engineering team or agency partners?',
-    answer: 'Yes. I frequently advise and augment existing in-house engineering teams, dev shops, and third-party vendors. I serve as the strategic technical authority—reviewing code quality, establishing type-safe CI/CD pipelines, evaluating vendor security risks, and mentoring junior developers on enterprise security practices.'
-  },
-  {
-    id: 'faq-6',
-    category: 'Scope & Deliverables',
-    question: 'How do you handle data privacy and IP ownership for custom software builds?',
-    answer: 'All intellectual property, source code, data schemas, and architecture documentation created during the engagement belong 100% to your organization from day one. All advisory contracts include strict NDA clauses and follow ISO/GDPR compliant data handling standards.'
+    id: 'pawmfort',
+    number: '09',
+    title: 'Pawmfort',
+    liveBrand: 'Pawmfort',
+    label: 'Pet commerce',
+    url: 'https://pawmfort.lovable.app/',
+    category: 'Consumer',
+    summary: 'A polished pet-wellness storefront with product discovery, category filters, cart flows, trust signals, and content-led merchandising.',
+    problem: 'Pet owners want products that feel safe, useful, and easy to compare, while a small consumer brand needs a storefront that communicates care before asking for a purchase.',
+    solution: 'The public storefront combines a warm brand story, product categories, product detail pages, add-to-cart actions, checkout trust signals, shipping and returns information, and email capture for future engagement.',
+    stack: ['React', 'TypeScript', 'E-commerce UX', 'Product discovery', 'Cart flow'],
+    accent: '#84a98c',
+    icon: 'paw',
+    article: {
+      standfirst: 'Pawmfort is a consumer-commerce build that shows how design, merchandising, and trust can work together. It treats pet products as part of a care routine rather than a grid of undifferentiated items.',
+      sections: [
+        {
+          heading: 'The commerce problem',
+          paragraphs: [
+            'Pet owners buy for animals that cannot explain what feels comfortable or safe. The storefront therefore has to make product purpose obvious, create confidence around quality and returns, and keep the path from discovery to cart straightforward.',
+            'For the brand, the challenge is to balance emotional connection with practical information. A warm visual identity should support conversion, not replace clarity.'
+          ]
+        },
+        {
+          heading: 'The product response',
+          paragraphs: [
+            'The public experience leads with a strong promise around comfort and wellness, then organises products into Hydration, Grooming, Comfort, and Safety. Product cards carry badges, descriptions, prices, review counts, and add-to-cart actions, while the supporting content explains guarantees, shipping, and secure checkout.',
+            'This creates a merchandising system that can grow. New products can be added without losing the category structure or the brand voice that helps customers decide.'
+          ]
+        },
+        {
+          heading: 'Systems thinking behind the build',
+          paragraphs: [
+            'The storefront should keep product data, inventory status, cart state, checkout, fulfilment, returns, and customer communication connected. The interface may feel simple, but the underlying system must preserve accurate price, availability, and order state across every step.',
+            'The next level of maturity is lifecycle thinking: product education, post-purchase support, repeat purchase reminders, and customer feedback can turn a single transaction into a durable relationship.'
+          ]
+        }
+      ],
+      takeaway: 'The build demonstrates how a focused e-commerce experience can turn product information and trust signals into a calm, conversion-ready customer journey.',
+      publicSurface: 'The live storefront currently presents Pawmfort as a premium dog and cat comfort and wellness brand with category filters, product pages, cart, shipping, returns, trust signals, and email capture.'
+    }
   }
 ];
