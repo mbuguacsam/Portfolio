@@ -12,11 +12,22 @@ export interface ArticleSection {
   paragraphs: string[];
 }
 
+export interface LinkedInSource {
+  id: string;
+  kind: 'Post' | 'Newsletter';
+  title: string;
+  url: string;
+  date: string;
+  summary: string;
+}
+
 export interface ProjectArticle {
   standfirst: string;
   sections: ArticleSection[];
   takeaway: string;
   publicSurface: string;
+  automationLens: string;
+  sourceIds: string[];
 }
 
 export interface Project {

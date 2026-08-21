@@ -1,9 +1,116 @@
-import { LinkedInProfile, Project } from './types';
+import { LinkedInProfile, LinkedInSource, Project } from './types';
 
 export const LINKEDIN_PROFILE: LinkedInProfile = {
-  url: 'https://www.linkedin.com/in/samson-m-a1332a174',
-  status: 'Public profile link; individual posts are intentionally not fabricated while LinkedIn is behind an auth wall.'
+  url: 'https://www.linkedin.com/in/samson-chege-mbugua',
+  status: 'Authenticated source trail collected from Samson Mbugua’s LinkedIn activity and TechGuard Insights newsletter.'
 };
+
+export const LINKEDIN_SOURCES: LinkedInSource[] = [
+  {
+    id: 'post-safe-failure',
+    kind: 'Post',
+    title: 'An agentic workflow should fail safely, not silently',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496542016835747841/',
+    date: 'Recent activity',
+    summary: 'Least privilege, approved context, bounded actions, human escalation, audit trails, and visible safe-failure handling.'
+  },
+  {
+    id: 'post-bounded-pilot-audit',
+    kind: 'Post',
+    title: 'A practical invitation for all sectors',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496428480197365760/',
+    date: 'Recent activity',
+    summary: 'A useful AI conversation ends with a bounded pilot that maps triggers, approved information, repetitive actions, exceptions, human approval, and measurable scope.'
+  },
+  {
+    id: 'post-after-trigger-audit',
+    kind: 'Post',
+    title: 'What happens after the trigger?',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496428416028577792/',
+    date: 'Recent activity',
+    summary: 'Log the request, record approved context, store the prepared action, capture the reviewer, and keep the exception and outcome visible.'
+  },
+  {
+    id: 'post-audit-trails',
+    kind: 'Post',
+    title: 'Audit trails make automation trustworthy',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496428352388435969/',
+    date: 'Recent activity',
+    summary: 'A controlled workflow makes ownership and history clear through a record of trigger, context, prepared action, human approval, and outcome.'
+  },
+  {
+    id: 'post-human-approval',
+    kind: 'Post',
+    title: 'Human approval is a feature',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7496071751441813504/',
+    date: 'Recent activity',
+    summary: 'Uncertain, sensitive, or high-value cases should route to a named human owner rather than silently becoming automated decisions.'
+  },
+  {
+    id: 'post-bounded-pilot-operations',
+    kind: 'Post',
+    title: 'A practical invitation for operational follow-up',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495841337599037440/',
+    date: 'Recent activity',
+    summary: 'Start with follow-up that depends on inboxes, spreadsheets, WhatsApp threads, or memory, then measure handoff and exception performance.'
+  },
+  {
+    id: 'post-process-map-operations',
+    kind: 'Post',
+    title: 'A decision-maker question for operational handoffs',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495784487549755392/',
+    date: 'Recent activity',
+    summary: 'Locate the first signal, identify manual handoffs, define approved data and rules, automate reminders and routing, and measure unresolved exceptions.'
+  },
+  {
+    id: 'post-opportunity-leak',
+    kind: 'Post',
+    title: 'Where opportunities leak',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495726442152894464/',
+    date: 'Recent activity',
+    summary: 'The highest-value automation opportunity is often a repeatedly delayed, forgotten, or inconsistently handled handoff.'
+  },
+  {
+    id: 'post-chatbot-next-step-invitation',
+    kind: 'Post',
+    title: 'When a chatbot answers but does not move work forward',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495505443331526656/',
+    date: 'Recent activity',
+    summary: 'Map the next controlled operational task after an answer instead of treating conversation as the end of the workflow.'
+  },
+  {
+    id: 'post-chatbot-next-step',
+    kind: 'Post',
+    title: 'Agentic AI is more than a chatbot',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495423986953162752/',
+    date: 'Recent activity',
+    summary: 'Connect a response to a controlled next step such as creating a task, requesting missing information, or routing an exception.'
+  },
+  {
+    id: 'post-newsletter-promotion',
+    kind: 'Post',
+    title: 'AI automation helps people spend less time chasing information',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495364511160504320/',
+    date: 'Recent activity',
+    summary: 'Newsletter promotion covering lead follow-up, customer communication, workflow coordination, operational visibility, and human-controlled safeguards across sectors.'
+  },
+  {
+    id: 'post-agentic-ai-definition',
+    kind: 'Post',
+    title: 'Agentic AI is more than a chatbot',
+    url: 'https://www.linkedin.com/feed/update/urn:li:activity:7495347521465155587/',
+    date: 'Recent activity',
+    summary: 'An agentic workflow connects approved context and a response to a controlled operational next step, with escalation and auditability.'
+  },
+  {
+    id: 'newsletter-agentic-ai',
+    kind: 'Newsletter',
+    title: 'From Busywork to Business Systems: How Agentic AI Can Help Your Business Move Faster',
+    url: 'https://www.linkedin.com/pulse/from-busywork-business-systems-how-agentic-ai-can-help-samson-mbugua-rz8of/',
+    date: 'August 18, 2026',
+    summary: 'TechGuard Insights issue on workflow-first automation, agentic AI, customer and operations use cases, responsible boundaries, and starting with one measurable workflow.'
+  }
+];
 
 export const PROJECTS: Project[] = [
   {
@@ -46,7 +153,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how a local service marketplace can use workflow design—not just listings—to create trust, speed, and accountability.',
-      publicSurface: 'The public page currently presents Mechanic Mtaani with booking, GPS tracking, mechanic onboarding, service categories, M-Pesa/card payment language, and fleet-oriented support.'
+      publicSurface: 'The public page currently presents Mechanic Mtaani with booking, GPS tracking, mechanic onboarding, service categories, M-Pesa/card payment language, and fleet-oriented support.',
+      automationLens: 'The LinkedIn source trail sharpens the marketplace story: capture the request, classify urgency, route it to an accountable mechanic, keep status visible, and escalate exceptions instead of leaving a driver to chase updates across messages.',
+      sourceIds: ['post-bounded-pilot-operations', 'post-after-trigger-audit', 'post-safe-failure', 'newsletter-agentic-ai']
     }
   },
   {
@@ -89,7 +198,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how a focused internal tool can make an existing customer channel more reliable without asking a business to replace the channel its customers already use.',
-      publicSurface: 'The public Base44 page describes an automated lead-capture and order-management platform for Starlight Restaurant and exposes admin, menu, branch, employee, WhatsApp, login, and dashboard areas.'
+      publicSurface: 'The public Base44 page describes an automated lead-capture and order-management platform for Starlight Restaurant and exposes admin, menu, branch, employee, WhatsApp, login, and dashboard areas.',
+      automationLens: 'The LinkedIn material maps directly to the order handoff: an answer should create the next controlled action, route the order to the correct branch and employee, and leave a record that managers can reconstruct later.',
+      sourceIds: ['post-chatbot-next-step', 'post-chatbot-next-step-invitation', 'post-process-map-operations', 'newsletter-agentic-ai']
     }
   },
   {
@@ -132,7 +243,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates the value of mapping a healthcare ecosystem around real handoffs rather than treating each feature as an isolated screen.',
-      publicSurface: 'The live URL currently presents AfyaConnect and exposes digital-health routes including consultations, prescriptions, inventory, marketplace, records, billing, analytics, compliance, and pharmacy operations.'
+      publicSurface: 'The live URL currently presents AfyaConnect and exposes digital-health routes including consultations, prescriptions, inventory, marketplace, records, billing, analytics, compliance, and pharmacy operations.',
+      automationLens: 'The LinkedIn sources reinforce a safety-first healthcare posture: use approved context and bounded administrative assistance, keep sensitive clinical and compliance decisions human-controlled, and preserve an audit trail across consultation, prescription, fulfilment, and records.',
+      sourceIds: ['post-safe-failure', 'post-human-approval', 'post-audit-trails', 'newsletter-agentic-ai']
     }
   },
   {
@@ -175,7 +288,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how lending software can make the borrower journey clearer while keeping credit responsibility with accountable people and processes.',
-      publicSurface: 'The live page currently presents Gianet Micro Finance, a working-capital lending application with borrower status, portal access, WhatsApp support, and a staged application form.'
+      publicSurface: 'The live page currently presents Gianet Micro Finance, a working-capital lending application with borrower status, portal access, WhatsApp support, and a staged application form.',
+      automationLens: 'The source-backed boundary is explicit: AI can help check completeness, prepare summaries, and route a case, but credit approval, compliance judgment, and financial advice remain accountable human decisions with explainable status.',
+      sourceIds: ['post-human-approval', 'post-safe-failure', 'post-after-trigger-audit', 'newsletter-agentic-ai']
     }
   },
   {
@@ -218,7 +333,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how civic software can combine service delivery, income opportunity, and community feedback in one understandable operating model.',
-      publicSurface: 'The live product currently presents EcoTrack Nakuru County as a 2026 pilot with household registration, collector onboarding, supervisor access, pickup tracking, eco-points, and community metrics.'
+      publicSurface: 'The live product currently presents EcoTrack Nakuru County as a 2026 pilot with household registration, collector onboarding, supervisor access, pickup tracking, eco-points, and community metrics.',
+      automationLens: 'The LinkedIn audit-trail theme fits the civic workflow: timestamp each pickup, preserve collector and supervisor ownership, surface disputed or missing events, and measure service outcomes instead of relying on scattered complaints.',
+      sourceIds: ['post-audit-trails', 'post-after-trigger-audit', 'post-process-map-operations', 'post-bounded-pilot-audit']
     }
   },
   {
@@ -261,7 +378,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how a travel product can create value through preparation and context, not only through reservations.',
-      publicSurface: 'The public page currently exposes Pori Guide routes for weather, wildlife, maps, guides, trip planning, packing, journeys, journals, galleries, rewards, and analytics.'
+      publicSurface: 'The public page currently exposes Pori Guide routes for weather, wildlife, maps, guides, trip planning, packing, journeys, journals, galleries, rewards, and analytics.',
+      automationLens: 'The newsletter’s workflow-first principle suggests a companion that prepares the next step—trip details, packing reminders, guide routing, or itinerary updates—while keeping uncertain field information and high-impact travel changes visible for human review.',
+      sourceIds: ['post-bounded-pilot-audit', 'post-process-map-operations', 'post-safe-failure', 'newsletter-agentic-ai']
     }
   },
   {
@@ -304,7 +423,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how a small-business tool can create leverage by joining speed at checkout with discipline in the records behind it.',
-      publicSurface: 'The live page currently positions RisitiYangu as a Kenya-focused mobile POS for M-Pesa, cash, WhatsApp receipts, VAT-ready invoices, KRA details, summaries, stock, loyalty, and reports.'
+      publicSurface: 'The live page currently positions RisitiYangu as a Kenya-focused mobile POS for M-Pesa, cash, WhatsApp receipts, VAT-ready invoices, KRA details, summaries, stock, loyalty, and reports.',
+      automationLens: 'The source trail turns the POS into a connected business system: after a payment event, the workflow can prepare a receipt, update inventory, flag exceptions, and retain a traceable transaction record without turning compliance into an unsupported promise.',
+      sourceIds: ['post-chatbot-next-step', 'post-after-trigger-audit', 'post-opportunity-leak', 'newsletter-agentic-ai']
     }
   },
   {
@@ -347,7 +468,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how an editorial interface can balance reader speed with the structure required for responsible publishing.',
-      publicSurface: 'The live URL currently presents FARAGHA Media Group with public news categories, breaking-news presentation, live analysis, a public portal, and management dashboard navigation.'
+      publicSurface: 'The live URL currently presents FARAGHA Media Group with public news categories, breaking-news presentation, live analysis, a public portal, and management dashboard navigation.',
+      automationLens: 'The LinkedIn governance posts are directly relevant to publishing: approved sources, named editorial ownership, visible correction paths, escalation for uncertain claims, and an audit trail should sit behind fast public updates.',
+      sourceIds: ['post-safe-failure', 'post-audit-trails', 'post-human-approval', 'newsletter-agentic-ai']
     }
   },
   {
@@ -390,7 +513,9 @@ export const PROJECTS: Project[] = [
         }
       ],
       takeaway: 'The build demonstrates how a focused e-commerce experience can turn product information and trust signals into a calm, conversion-ready customer journey.',
-      publicSurface: 'The live storefront currently presents Pawmfort as a premium dog and cat comfort and wellness brand with category filters, product pages, cart, shipping, returns, trust signals, and email capture.'
+      publicSurface: 'The live storefront currently presents Pawmfort as a premium dog and cat comfort and wellness brand with category filters, product pages, cart, shipping, returns, trust signals, and email capture.',
+      automationLens: 'The newsletter’s commerce pattern applies here as lifecycle orchestration: answer approved product questions, request missing order details, prepare follow-up, route exceptions, and keep customer support human when care or safety is involved.',
+      sourceIds: ['post-chatbot-next-step-invitation', 'post-chatbot-next-step', 'post-bounded-pilot-audit', 'newsletter-agentic-ai']
     }
   }
 ];

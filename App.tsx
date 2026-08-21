@@ -24,7 +24,7 @@ import {
   Wrench,
   X,
 } from 'lucide-react';
-import { LINKEDIN_PROFILE, PROJECTS } from './constants';
+import { LINKEDIN_PROFILE, LINKEDIN_SOURCES, PROJECTS } from './constants';
 import { Project } from './types';
 
 const projectIconMap = {
@@ -40,6 +40,8 @@ const projectIconMap = {
 } as const;
 
 type IconName = keyof typeof projectIconMap;
+
+const linkedInSourceMap = new Map(LINKEDIN_SOURCES.map((source) => [source.id, source]));
 
 function ProjectIcon({ name, size = 22 }: { name: string; size?: number }) {
   const Icon = projectIconMap[name as IconName] ?? Sparkles;
@@ -175,6 +177,28 @@ function ProjectArticle({ project, onClose }: { project: Project; onClose: () =>
                 <span className="micro-label">What is visible on the live page</span>
                 <p>{project.article.publicSurface}</p>
               </section>
+              <section className="article-automation-lens">
+                <span className="micro-label">Automation / AI lens</span>
+                <p>{project.article.automationLens}</p>
+              </section>
+              <section className="article-sources">
+                <div className="article-sources__heading">
+                  <span className="micro-label">LinkedIn source trail</span>
+                  <span>{project.article.sourceIds.length} linked sources</span>
+                </div>
+                <div className="article-sources__list">
+                  {project.article.sourceIds.map((sourceId) => {
+                    const source = linkedInSourceMap.get(sourceId);
+                    if (!source) return null;
+                    return (
+                      <a key={source.id} href={source.url} target="_blank" rel="noreferrer" className="article-source-link">
+                        <span><small>{source.kind} / {source.date}</small><strong>{source.title}</strong></span>
+                        <ArrowUpRight size={15} />
+                      </a>
+                    );
+                  })}
+                </div>
+              </section>
               <footer className="article-footer">
                 <a href={project.url} target="_blank" rel="noreferrer" className="primary-button">
                   Open {project.liveBrand} <ArrowUpRight size={17} />
@@ -271,6 +295,7 @@ export default function App() {
             <div>
               <p>I care about the connective tissue around a product: the handoff from customer to operator, the state change from application to decision, and the record that makes an action explainable later.</p>
               <p>The projects below are intentionally presented as working product stories. Some are branded differently on their live pages today; those names are shown clearly so the portfolio stays honest about what is publicly visible.</p>
+              <p>The broader practice remains visible here too: AI readiness audits, n8n and Zapier workflow automation, rapid Lovable/Base44/Replit builds, CRM and WhatsApp handoffs, cybersecurity-aware controls, and the human approval points that keep automation accountable.</p>
             </div>
           </div>
         </section>
@@ -281,7 +306,7 @@ export default function App() {
               <div className="section-marker">01 / Selected work</div>
               <h2>Nine products.<br /><em>One way of thinking.</em></h2>
             </div>
-            <p className="section-heading__note">Read the short card for the system at a glance, then open the full article for the problem, product response, architecture thinking, and current public surface.</p>
+            <p className="section-heading__note">Read the short card for the system at a glance, then open the full article for the problem, product response, architecture thinking, automation lens, and current public surface.</p>
           </div>
           <div className="filter-bar" role="tablist" aria-label="Filter projects by category">
             {filters.map((filter) => (
@@ -318,22 +343,36 @@ export default function App() {
           </div>
           <div className="link-note">
             <button onClick={() => setOpenNote((current) => !current)} className="link-note__toggle" aria-expanded={openNote}>
-              <span><Link2 size={16} /> LinkedIn backlink note</span>{openNote ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              <span><Link2 size={16} /> LinkedIn source trail / {LINKEDIN_SOURCES.length} sources</span>{openNote ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
             </button>
             <AnimatePresence>
               {openNote && (
                 <motion.p initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}>
-                  The canonical LinkedIn profile link is included above. LinkedIn posts were not publicly accessible in the available session, so this update does not invent individual post URLs. Send the post links when you want them mapped one-to-one to the relevant project articles.
+                  The source trail combines the authenticated activity posts currently available on LinkedIn with the TechGuard Insights newsletter. Individual project articles use the most relevant sources so readers can move from a product decision to the original automation, AI, governance, or operations context.
                 </motion.p>
               )}
             </AnimatePresence>
+          </div>
+          <div className="source-index">
+            <div className="source-index__heading">
+              <span className="micro-label">Writing archive / LinkedIn backlinks</span>
+              <span>Posts + newsletter</span>
+            </div>
+            <div className="source-index__grid">
+              {LINKEDIN_SOURCES.map((source) => (
+                <a key={source.id} href={source.url} target="_blank" rel="noreferrer" className="source-index__item">
+                  <span><small>{source.kind} / {source.date}</small><strong>{source.title}</strong><em>{source.summary}</em></span>
+                  <ArrowUpRight size={16} />
+                </a>
+              ))}
+            </div>
           </div>
         </section>
 
         <section className="closing-section section-frame">
           <div className="closing-section__mark"><CheckCircle2 size={22} /> Open to thoughtful systems work.</div>
           <h2>Good products make the next decision easier.</h2>
-          <p>If you are looking at one of these systems, start with the article, inspect the live product, and follow the source trail. That is the standard I want this portfolio to set.</p>
+          <p>If you are looking at one of these systems, start with the article, inspect the live product, and follow the source trail. The same practice that informs the articles—automation with boundaries, AI with approved context, and human accountability—also guides the broader advisory work.</p>
           <div className="closing-section__actions">
             <a href={LINKEDIN_PROFILE.url} target="_blank" rel="noreferrer" className="primary-button">Connect on LinkedIn <Linkedin size={17} /></a>
             <button className="secondary-button" onClick={() => goTo('work')}>Review the projects <ArrowDown size={17} /></button>
